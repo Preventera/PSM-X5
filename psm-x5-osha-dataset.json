@@ -1,0 +1,2657 @@
+{
+  "_metadata": {
+    "source": "PSM-X5 Scrapling X5 — OSHA DOL Enforcement Data + CSB + API 754",
+    "generated": "2026-03-11T17:06:36.624806",
+    "disclaimer": "Dataset synthétique réaliste basé sur patterns réels scrapés. Les chiffres individuels sont modélisés, pas des données brutes OSHA.",
+    "real_sources": [
+      "https://enforcedata.dol.gov/views/data_catalogs.php",
+      "https://www.csb.gov/investigations/completed-investigations/",
+      "https://www.osha.gov/data",
+      "https://inspectioneering.com/blog/2019-01-03/8177/a-quick-review-of-recent-osha-psm-citations"
+    ],
+    "coverage": "2016-2025",
+    "standard": "29 CFR 1910.119"
+  },
+  "citations_by_element": {
+    "2016": {
+      "f": {
+        "section": "1910.119(f)",
+        "name": "Operating Procedures",
+        "citations": 194,
+        "rank": 1
+      },
+      "j": {
+        "section": "1910.119(j)",
+        "name": "Mechanical Integrity",
+        "citations": 144,
+        "rank": 2
+      },
+      "d": {
+        "section": "1910.119(d)",
+        "name": "Process Safety Information",
+        "citations": 121,
+        "rank": 3
+      },
+      "e": {
+        "section": "1910.119(e)",
+        "name": "Process Hazard Analysis",
+        "citations": 120,
+        "rank": 4
+      },
+      "l": {
+        "section": "1910.119(l)",
+        "name": "Management of Change",
+        "citations": 84,
+        "rank": 5
+      },
+      "g": {
+        "section": "1910.119(g)",
+        "name": "Training",
+        "citations": 67,
+        "rank": 6
+      },
+      "m": {
+        "section": "1910.119(m)",
+        "name": "Incident Investigation",
+        "citations": 45,
+        "rank": 7
+      },
+      "o": {
+        "section": "1910.119(o)",
+        "name": "Compliance Audits",
+        "citations": 54,
+        "rank": 8
+      },
+      "c": {
+        "section": "1910.119(c)",
+        "name": "Employee Participation",
+        "citations": 35,
+        "rank": 9
+      },
+      "i": {
+        "section": "1910.119(i)",
+        "name": "Pre-Startup Safety Review",
+        "citations": 34,
+        "rank": 10
+      },
+      "h": {
+        "section": "1910.119(h)",
+        "name": "Contractors",
+        "citations": 27,
+        "rank": 11
+      },
+      "n": {
+        "section": "1910.119(n)",
+        "name": "Emergency Planning",
+        "citations": 21,
+        "rank": 12
+      },
+      "k": {
+        "section": "1910.119(k)",
+        "name": "Hot Work Permits",
+        "citations": 10,
+        "rank": 13
+      },
+      "p": {
+        "section": "1910.119(p)",
+        "name": "Trade Secrets",
+        "citations": 9,
+        "rank": 14
+      }
+    },
+    "2017": {
+      "f": {
+        "section": "1910.119(f)",
+        "name": "Operating Procedures",
+        "citations": 101,
+        "rank": 1
+      },
+      "j": {
+        "section": "1910.119(j)",
+        "name": "Mechanical Integrity",
+        "citations": 91,
+        "rank": 2
+      },
+      "d": {
+        "section": "1910.119(d)",
+        "name": "Process Safety Information",
+        "citations": 84,
+        "rank": 3
+      },
+      "e": {
+        "section": "1910.119(e)",
+        "name": "Process Hazard Analysis",
+        "citations": 74,
+        "rank": 4
+      },
+      "l": {
+        "section": "1910.119(l)",
+        "name": "Management of Change",
+        "citations": 66,
+        "rank": 5
+      },
+      "g": {
+        "section": "1910.119(g)",
+        "name": "Training",
+        "citations": 48,
+        "rank": 6
+      },
+      "m": {
+        "section": "1910.119(m)",
+        "name": "Incident Investigation",
+        "citations": 28,
+        "rank": 7
+      },
+      "o": {
+        "section": "1910.119(o)",
+        "name": "Compliance Audits",
+        "citations": 36,
+        "rank": 8
+      },
+      "c": {
+        "section": "1910.119(c)",
+        "name": "Employee Participation",
+        "citations": 24,
+        "rank": 9
+      },
+      "i": {
+        "section": "1910.119(i)",
+        "name": "Pre-Startup Safety Review",
+        "citations": 21,
+        "rank": 10
+      },
+      "h": {
+        "section": "1910.119(h)",
+        "name": "Contractors",
+        "citations": 20,
+        "rank": 11
+      },
+      "n": {
+        "section": "1910.119(n)",
+        "name": "Emergency Planning",
+        "citations": 12,
+        "rank": 12
+      },
+      "k": {
+        "section": "1910.119(k)",
+        "name": "Hot Work Permits",
+        "citations": 6,
+        "rank": 13
+      },
+      "p": {
+        "section": "1910.119(p)",
+        "name": "Trade Secrets",
+        "citations": 6,
+        "rank": 14
+      }
+    },
+    "2018": {
+      "f": {
+        "section": "1910.119(f)",
+        "name": "Operating Procedures",
+        "citations": 110,
+        "rank": 1
+      },
+      "j": {
+        "section": "1910.119(j)",
+        "name": "Mechanical Integrity",
+        "citations": 108,
+        "rank": 2
+      },
+      "d": {
+        "section": "1910.119(d)",
+        "name": "Process Safety Information",
+        "citations": 107,
+        "rank": 3
+      },
+      "e": {
+        "section": "1910.119(e)",
+        "name": "Process Hazard Analysis",
+        "citations": 87,
+        "rank": 4
+      },
+      "l": {
+        "section": "1910.119(l)",
+        "name": "Management of Change",
+        "citations": 65,
+        "rank": 5
+      },
+      "g": {
+        "section": "1910.119(g)",
+        "name": "Training",
+        "citations": 47,
+        "rank": 6
+      },
+      "m": {
+        "section": "1910.119(m)",
+        "name": "Incident Investigation",
+        "citations": 33,
+        "rank": 7
+      },
+      "o": {
+        "section": "1910.119(o)",
+        "name": "Compliance Audits",
+        "citations": 34,
+        "rank": 8
+      },
+      "c": {
+        "section": "1910.119(c)",
+        "name": "Employee Participation",
+        "citations": 29,
+        "rank": 9
+      },
+      "i": {
+        "section": "1910.119(i)",
+        "name": "Pre-Startup Safety Review",
+        "citations": 18,
+        "rank": 10
+      },
+      "h": {
+        "section": "1910.119(h)",
+        "name": "Contractors",
+        "citations": 18,
+        "rank": 11
+      },
+      "n": {
+        "section": "1910.119(n)",
+        "name": "Emergency Planning",
+        "citations": 15,
+        "rank": 12
+      },
+      "k": {
+        "section": "1910.119(k)",
+        "name": "Hot Work Permits",
+        "citations": 6,
+        "rank": 13
+      },
+      "p": {
+        "section": "1910.119(p)",
+        "name": "Trade Secrets",
+        "citations": 7,
+        "rank": 14
+      }
+    },
+    "2019": {
+      "f": {
+        "section": "1910.119(f)",
+        "name": "Operating Procedures",
+        "citations": 126,
+        "rank": 1
+      },
+      "j": {
+        "section": "1910.119(j)",
+        "name": "Mechanical Integrity",
+        "citations": 108,
+        "rank": 2
+      },
+      "d": {
+        "section": "1910.119(d)",
+        "name": "Process Safety Information",
+        "citations": 106,
+        "rank": 3
+      },
+      "e": {
+        "section": "1910.119(e)",
+        "name": "Process Hazard Analysis",
+        "citations": 70,
+        "rank": 4
+      },
+      "l": {
+        "section": "1910.119(l)",
+        "name": "Management of Change",
+        "citations": 66,
+        "rank": 5
+      },
+      "g": {
+        "section": "1910.119(g)",
+        "name": "Training",
+        "citations": 48,
+        "rank": 6
+      },
+      "m": {
+        "section": "1910.119(m)",
+        "name": "Incident Investigation",
+        "citations": 30,
+        "rank": 7
+      },
+      "o": {
+        "section": "1910.119(o)",
+        "name": "Compliance Audits",
+        "citations": 35,
+        "rank": 8
+      },
+      "c": {
+        "section": "1910.119(c)",
+        "name": "Employee Participation",
+        "citations": 24,
+        "rank": 9
+      },
+      "i": {
+        "section": "1910.119(i)",
+        "name": "Pre-Startup Safety Review",
+        "citations": 21,
+        "rank": 10
+      },
+      "h": {
+        "section": "1910.119(h)",
+        "name": "Contractors",
+        "citations": 19,
+        "rank": 11
+      },
+      "n": {
+        "section": "1910.119(n)",
+        "name": "Emergency Planning",
+        "citations": 14,
+        "rank": 12
+      },
+      "k": {
+        "section": "1910.119(k)",
+        "name": "Hot Work Permits",
+        "citations": 6,
+        "rank": 13
+      },
+      "p": {
+        "section": "1910.119(p)",
+        "name": "Trade Secrets",
+        "citations": 6,
+        "rank": 14
+      }
+    },
+    "2020": {
+      "f": {
+        "section": "1910.119(f)",
+        "name": "Operating Procedures",
+        "citations": 65,
+        "rank": 1
+      },
+      "j": {
+        "section": "1910.119(j)",
+        "name": "Mechanical Integrity",
+        "citations": 57,
+        "rank": 2
+      },
+      "d": {
+        "section": "1910.119(d)",
+        "name": "Process Safety Information",
+        "citations": 56,
+        "rank": 3
+      },
+      "e": {
+        "section": "1910.119(e)",
+        "name": "Process Hazard Analysis",
+        "citations": 54,
+        "rank": 4
+      },
+      "l": {
+        "section": "1910.119(l)",
+        "name": "Management of Change",
+        "citations": 35,
+        "rank": 5
+      },
+      "g": {
+        "section": "1910.119(g)",
+        "name": "Training",
+        "citations": 25,
+        "rank": 6
+      },
+      "m": {
+        "section": "1910.119(m)",
+        "name": "Incident Investigation",
+        "citations": 23,
+        "rank": 7
+      },
+      "o": {
+        "section": "1910.119(o)",
+        "name": "Compliance Audits",
+        "citations": 18,
+        "rank": 8
+      },
+      "c": {
+        "section": "1910.119(c)",
+        "name": "Employee Participation",
+        "citations": 14,
+        "rank": 9
+      },
+      "i": {
+        "section": "1910.119(i)",
+        "name": "Pre-Startup Safety Review",
+        "citations": 12,
+        "rank": 10
+      },
+      "h": {
+        "section": "1910.119(h)",
+        "name": "Contractors",
+        "citations": 12,
+        "rank": 11
+      },
+      "n": {
+        "section": "1910.119(n)",
+        "name": "Emergency Planning",
+        "citations": 8,
+        "rank": 12
+      },
+      "k": {
+        "section": "1910.119(k)",
+        "name": "Hot Work Permits",
+        "citations": 4,
+        "rank": 13
+      },
+      "p": {
+        "section": "1910.119(p)",
+        "name": "Trade Secrets",
+        "citations": 4,
+        "rank": 14
+      }
+    },
+    "2021": {
+      "f": {
+        "section": "1910.119(f)",
+        "name": "Operating Procedures",
+        "citations": 91,
+        "rank": 1
+      },
+      "j": {
+        "section": "1910.119(j)",
+        "name": "Mechanical Integrity",
+        "citations": 82,
+        "rank": 2
+      },
+      "d": {
+        "section": "1910.119(d)",
+        "name": "Process Safety Information",
+        "citations": 68,
+        "rank": 3
+      },
+      "e": {
+        "section": "1910.119(e)",
+        "name": "Process Hazard Analysis",
+        "citations": 61,
+        "rank": 4
+      },
+      "l": {
+        "section": "1910.119(l)",
+        "name": "Management of Change",
+        "citations": 51,
+        "rank": 5
+      },
+      "g": {
+        "section": "1910.119(g)",
+        "name": "Training",
+        "citations": 41,
+        "rank": 6
+      },
+      "m": {
+        "section": "1910.119(m)",
+        "name": "Incident Investigation",
+        "citations": 28,
+        "rank": 7
+      },
+      "o": {
+        "section": "1910.119(o)",
+        "name": "Compliance Audits",
+        "citations": 23,
+        "rank": 8
+      },
+      "c": {
+        "section": "1910.119(c)",
+        "name": "Employee Participation",
+        "citations": 21,
+        "rank": 9
+      },
+      "i": {
+        "section": "1910.119(i)",
+        "name": "Pre-Startup Safety Review",
+        "citations": 14,
+        "rank": 10
+      },
+      "h": {
+        "section": "1910.119(h)",
+        "name": "Contractors",
+        "citations": 17,
+        "rank": 11
+      },
+      "n": {
+        "section": "1910.119(n)",
+        "name": "Emergency Planning",
+        "citations": 11,
+        "rank": 12
+      },
+      "k": {
+        "section": "1910.119(k)",
+        "name": "Hot Work Permits",
+        "citations": 5,
+        "rank": 13
+      },
+      "p": {
+        "section": "1910.119(p)",
+        "name": "Trade Secrets",
+        "citations": 5,
+        "rank": 14
+      }
+    },
+    "2022": {
+      "f": {
+        "section": "1910.119(f)",
+        "name": "Operating Procedures",
+        "citations": 126,
+        "rank": 1
+      },
+      "j": {
+        "section": "1910.119(j)",
+        "name": "Mechanical Integrity",
+        "citations": 97,
+        "rank": 2
+      },
+      "d": {
+        "section": "1910.119(d)",
+        "name": "Process Safety Information",
+        "citations": 83,
+        "rank": 3
+      },
+      "e": {
+        "section": "1910.119(e)",
+        "name": "Process Hazard Analysis",
+        "citations": 84,
+        "rank": 4
+      },
+      "l": {
+        "section": "1910.119(l)",
+        "name": "Management of Change",
+        "citations": 55,
+        "rank": 5
+      },
+      "g": {
+        "section": "1910.119(g)",
+        "name": "Training",
+        "citations": 48,
+        "rank": 6
+      },
+      "m": {
+        "section": "1910.119(m)",
+        "name": "Incident Investigation",
+        "citations": 32,
+        "rank": 7
+      },
+      "o": {
+        "section": "1910.119(o)",
+        "name": "Compliance Audits",
+        "citations": 27,
+        "rank": 8
+      },
+      "c": {
+        "section": "1910.119(c)",
+        "name": "Employee Participation",
+        "citations": 23,
+        "rank": 9
+      },
+      "i": {
+        "section": "1910.119(i)",
+        "name": "Pre-Startup Safety Review",
+        "citations": 16,
+        "rank": 10
+      },
+      "h": {
+        "section": "1910.119(h)",
+        "name": "Contractors",
+        "citations": 18,
+        "rank": 11
+      },
+      "n": {
+        "section": "1910.119(n)",
+        "name": "Emergency Planning",
+        "citations": 12,
+        "rank": 12
+      },
+      "k": {
+        "section": "1910.119(k)",
+        "name": "Hot Work Permits",
+        "citations": 6,
+        "rank": 13
+      },
+      "p": {
+        "section": "1910.119(p)",
+        "name": "Trade Secrets",
+        "citations": 6,
+        "rank": 14
+      }
+    },
+    "2023": {
+      "f": {
+        "section": "1910.119(f)",
+        "name": "Operating Procedures",
+        "citations": 121,
+        "rank": 1
+      },
+      "j": {
+        "section": "1910.119(j)",
+        "name": "Mechanical Integrity",
+        "citations": 117,
+        "rank": 2
+      },
+      "d": {
+        "section": "1910.119(d)",
+        "name": "Process Safety Information",
+        "citations": 91,
+        "rank": 3
+      },
+      "e": {
+        "section": "1910.119(e)",
+        "name": "Process Hazard Analysis",
+        "citations": 93,
+        "rank": 4
+      },
+      "l": {
+        "section": "1910.119(l)",
+        "name": "Management of Change",
+        "citations": 69,
+        "rank": 5
+      },
+      "g": {
+        "section": "1910.119(g)",
+        "name": "Training",
+        "citations": 48,
+        "rank": 6
+      },
+      "m": {
+        "section": "1910.119(m)",
+        "name": "Incident Investigation",
+        "citations": 40,
+        "rank": 7
+      },
+      "o": {
+        "section": "1910.119(o)",
+        "name": "Compliance Audits",
+        "citations": 37,
+        "rank": 8
+      },
+      "c": {
+        "section": "1910.119(c)",
+        "name": "Employee Participation",
+        "citations": 26,
+        "rank": 9
+      },
+      "i": {
+        "section": "1910.119(i)",
+        "name": "Pre-Startup Safety Review",
+        "citations": 20,
+        "rank": 10
+      },
+      "h": {
+        "section": "1910.119(h)",
+        "name": "Contractors",
+        "citations": 19,
+        "rank": 11
+      },
+      "n": {
+        "section": "1910.119(n)",
+        "name": "Emergency Planning",
+        "citations": 13,
+        "rank": 12
+      },
+      "k": {
+        "section": "1910.119(k)",
+        "name": "Hot Work Permits",
+        "citations": 8,
+        "rank": 13
+      },
+      "p": {
+        "section": "1910.119(p)",
+        "name": "Trade Secrets",
+        "citations": 8,
+        "rank": 14
+      }
+    },
+    "2024": {
+      "f": {
+        "section": "1910.119(f)",
+        "name": "Operating Procedures",
+        "citations": 150,
+        "rank": 1
+      },
+      "j": {
+        "section": "1910.119(j)",
+        "name": "Mechanical Integrity",
+        "citations": 119,
+        "rank": 2
+      },
+      "d": {
+        "section": "1910.119(d)",
+        "name": "Process Safety Information",
+        "citations": 114,
+        "rank": 3
+      },
+      "e": {
+        "section": "1910.119(e)",
+        "name": "Process Hazard Analysis",
+        "citations": 96,
+        "rank": 4
+      },
+      "l": {
+        "section": "1910.119(l)",
+        "name": "Management of Change",
+        "citations": 71,
+        "rank": 5
+      },
+      "g": {
+        "section": "1910.119(g)",
+        "name": "Training",
+        "citations": 60,
+        "rank": 6
+      },
+      "m": {
+        "section": "1910.119(m)",
+        "name": "Incident Investigation",
+        "citations": 42,
+        "rank": 7
+      },
+      "o": {
+        "section": "1910.119(o)",
+        "name": "Compliance Audits",
+        "citations": 39,
+        "rank": 8
+      },
+      "c": {
+        "section": "1910.119(c)",
+        "name": "Employee Participation",
+        "citations": 31,
+        "rank": 9
+      },
+      "i": {
+        "section": "1910.119(i)",
+        "name": "Pre-Startup Safety Review",
+        "citations": 20,
+        "rank": 10
+      },
+      "h": {
+        "section": "1910.119(h)",
+        "name": "Contractors",
+        "citations": 20,
+        "rank": 11
+      },
+      "n": {
+        "section": "1910.119(n)",
+        "name": "Emergency Planning",
+        "citations": 17,
+        "rank": 12
+      },
+      "k": {
+        "section": "1910.119(k)",
+        "name": "Hot Work Permits",
+        "citations": 7,
+        "rank": 13
+      },
+      "p": {
+        "section": "1910.119(p)",
+        "name": "Trade Secrets",
+        "citations": 6,
+        "rank": 14
+      }
+    },
+    "2025": {
+      "f": {
+        "section": "1910.119(f)",
+        "name": "Operating Procedures",
+        "citations": 109,
+        "rank": 1
+      },
+      "j": {
+        "section": "1910.119(j)",
+        "name": "Mechanical Integrity",
+        "citations": 101,
+        "rank": 2
+      },
+      "d": {
+        "section": "1910.119(d)",
+        "name": "Process Safety Information",
+        "citations": 86,
+        "rank": 3
+      },
+      "e": {
+        "section": "1910.119(e)",
+        "name": "Process Hazard Analysis",
+        "citations": 90,
+        "rank": 4
+      },
+      "l": {
+        "section": "1910.119(l)",
+        "name": "Management of Change",
+        "citations": 58,
+        "rank": 5
+      },
+      "g": {
+        "section": "1910.119(g)",
+        "name": "Training",
+        "citations": 53,
+        "rank": 6
+      },
+      "m": {
+        "section": "1910.119(m)",
+        "name": "Incident Investigation",
+        "citations": 39,
+        "rank": 7
+      },
+      "o": {
+        "section": "1910.119(o)",
+        "name": "Compliance Audits",
+        "citations": 35,
+        "rank": 8
+      },
+      "c": {
+        "section": "1910.119(c)",
+        "name": "Employee Participation",
+        "citations": 24,
+        "rank": 9
+      },
+      "i": {
+        "section": "1910.119(i)",
+        "name": "Pre-Startup Safety Review",
+        "citations": 20,
+        "rank": 10
+      },
+      "h": {
+        "section": "1910.119(h)",
+        "name": "Contractors",
+        "citations": 20,
+        "rank": 11
+      },
+      "n": {
+        "section": "1910.119(n)",
+        "name": "Emergency Planning",
+        "citations": 14,
+        "rank": 12
+      },
+      "k": {
+        "section": "1910.119(k)",
+        "name": "Hot Work Permits",
+        "citations": 6,
+        "rank": 13
+      },
+      "p": {
+        "section": "1910.119(p)",
+        "name": "Trade Secrets",
+        "citations": 6,
+        "rank": 14
+      }
+    }
+  },
+  "citations_by_state": {
+    "2016": {
+      "TX": 247,
+      "LA": 168,
+      "CA": 72,
+      "OH": 69,
+      "PA": 43,
+      "IL": 57,
+      "NJ": 40,
+      "IN": 42,
+      "WV": 25,
+      "KY": 28,
+      "AL": 30,
+      "TN": 26,
+      "OK": 23,
+      "MI": 16,
+      "GA": 20,
+      "WA": 24,
+      "NC": 18,
+      "MS": 24,
+      "MO": 17,
+      "VA": 10,
+      "OTHER": 104
+    },
+    "2017": {
+      "TX": 153,
+      "LA": 85,
+      "CA": 51,
+      "OH": 37,
+      "PA": 38,
+      "IL": 28,
+      "NJ": 29,
+      "IN": 29,
+      "WV": 16,
+      "KY": 20,
+      "AL": 18,
+      "TN": 19,
+      "OK": 11,
+      "MI": 11,
+      "GA": 13,
+      "WA": 13,
+      "NC": 12,
+      "MS": 11,
+      "MO": 12,
+      "VA": 7,
+      "OTHER": 49
+    },
+    "2018": {
+      "TX": 132,
+      "LA": 111,
+      "CA": 54,
+      "OH": 39,
+      "PA": 31,
+      "IL": 39,
+      "NJ": 30,
+      "IN": 31,
+      "WV": 19,
+      "KY": 21,
+      "AL": 25,
+      "TN": 23,
+      "OK": 13,
+      "MI": 16,
+      "GA": 13,
+      "WA": 14,
+      "NC": 15,
+      "MS": 14,
+      "MO": 15,
+      "VA": 8,
+      "OTHER": 66
+    },
+    "2019": {
+      "TX": 127,
+      "LA": 91,
+      "CA": 56,
+      "OH": 34,
+      "PA": 33,
+      "IL": 28,
+      "NJ": 31,
+      "IN": 30,
+      "WV": 19,
+      "KY": 19,
+      "AL": 16,
+      "TN": 17,
+      "OK": 11,
+      "MI": 12,
+      "GA": 11,
+      "WA": 11,
+      "NC": 13,
+      "MS": 11,
+      "MO": 15,
+      "VA": 5,
+      "OTHER": 57
+    },
+    "2020": {
+      "TX": 103,
+      "LA": 52,
+      "CA": 37,
+      "OH": 22,
+      "PA": 23,
+      "IL": 19,
+      "NJ": 19,
+      "IN": 16,
+      "WV": 13,
+      "KY": 11,
+      "AL": 10,
+      "TN": 10,
+      "OK": 9,
+      "MI": 8,
+      "GA": 8,
+      "WA": 8,
+      "NC": 8,
+      "MS": 8,
+      "MO": 9,
+      "VA": 3,
+      "OTHER": 39
+    },
+    "2021": {
+      "TX": 133,
+      "LA": 78,
+      "CA": 40,
+      "OH": 25,
+      "PA": 27,
+      "IL": 26,
+      "NJ": 17,
+      "IN": 19,
+      "WV": 13,
+      "KY": 13,
+      "AL": 16,
+      "TN": 15,
+      "OK": 9,
+      "MI": 11,
+      "GA": 9,
+      "WA": 10,
+      "NC": 11,
+      "MS": 9,
+      "MO": 8,
+      "VA": 5,
+      "OTHER": 54
+    },
+    "2022": {
+      "TX": 117,
+      "LA": 74,
+      "CA": 65,
+      "OH": 38,
+      "PA": 25,
+      "IL": 26,
+      "NJ": 23,
+      "IN": 22,
+      "WV": 18,
+      "KY": 18,
+      "AL": 18,
+      "TN": 16,
+      "OK": 13,
+      "MI": 10,
+      "GA": 11,
+      "WA": 13,
+      "NC": 10,
+      "MS": 13,
+      "MO": 12,
+      "VA": 6,
+      "OTHER": 54
+    },
+    "2023": {
+      "TX": 152,
+      "LA": 115,
+      "CA": 72,
+      "OH": 49,
+      "PA": 30,
+      "IL": 31,
+      "NJ": 27,
+      "IN": 26,
+      "WV": 17,
+      "KY": 25,
+      "AL": 17,
+      "TN": 22,
+      "OK": 12,
+      "MI": 12,
+      "GA": 16,
+      "WA": 15,
+      "NC": 16,
+      "MS": 16,
+      "MO": 13,
+      "VA": 6,
+      "OTHER": 67
+    },
+    "2024": {
+      "TX": 144,
+      "LA": 96,
+      "CA": 57,
+      "OH": 38,
+      "PA": 41,
+      "IL": 44,
+      "NJ": 27,
+      "IN": 30,
+      "WV": 19,
+      "KY": 21,
+      "AL": 18,
+      "TN": 19,
+      "OK": 15,
+      "MI": 17,
+      "GA": 16,
+      "WA": 16,
+      "NC": 16,
+      "MS": 14,
+      "MO": 14,
+      "VA": 6,
+      "OTHER": 76
+    },
+    "2025": {
+      "TX": 166,
+      "LA": 97,
+      "CA": 57,
+      "OH": 41,
+      "PA": 34,
+      "IL": 30,
+      "NJ": 32,
+      "IN": 32,
+      "WV": 20,
+      "KY": 23,
+      "AL": 21,
+      "TN": 17,
+      "OK": 11,
+      "MI": 14,
+      "GA": 15,
+      "WA": 15,
+      "NC": 11,
+      "MS": 11,
+      "MO": 15,
+      "VA": 5,
+      "OTHER": 66
+    }
+  },
+  "citations_by_industry": {
+    "2016": {
+      "2911": {
+        "name": "Petroleum Refining",
+        "citations": 273
+      },
+      "2869": {
+        "name": "Industrial Organic Chemicals",
+        "citations": 137
+      },
+      "2819": {
+        "name": "Industrial Inorganic Chemicals",
+        "citations": 125
+      },
+      "2821": {
+        "name": "Plastics Materials & Resins",
+        "citations": 70
+      },
+      "2873": {
+        "name": "Nitrogenous Fertilizers",
+        "citations": 67
+      },
+      "4925": {
+        "name": "Gas Production & Distribution",
+        "citations": 62
+      },
+      "2813": {
+        "name": "Industrial Gases",
+        "citations": 47
+      },
+      "5171": {
+        "name": "Petroleum Bulk Stations",
+        "citations": 45
+      },
+      "2865": {
+        "name": "Cyclic Organic Crudes",
+        "citations": 41
+      },
+      "1094": {
+        "name": "Uranium-Radium-Vanadium Ores",
+        "citations": 23
+      },
+      "2899": {
+        "name": "Chemical Preparations NEC",
+        "citations": 42
+      },
+      "2861": {
+        "name": "Gum and Wood Chemicals",
+        "citations": 22
+      },
+      "3312": {
+        "name": "Steel Works & Blast Furnaces",
+        "citations": 19
+      }
+    },
+    "2017": {
+      "2911": {
+        "name": "Petroleum Refining",
+        "citations": 194
+      },
+      "2869": {
+        "name": "Industrial Organic Chemicals",
+        "citations": 108
+      },
+      "2819": {
+        "name": "Industrial Inorganic Chemicals",
+        "citations": 87
+      },
+      "2821": {
+        "name": "Plastics Materials & Resins",
+        "citations": 53
+      },
+      "2873": {
+        "name": "Nitrogenous Fertilizers",
+        "citations": 39
+      },
+      "4925": {
+        "name": "Gas Production & Distribution",
+        "citations": 44
+      },
+      "2813": {
+        "name": "Industrial Gases",
+        "citations": 36
+      },
+      "5171": {
+        "name": "Petroleum Bulk Stations",
+        "citations": 32
+      },
+      "2865": {
+        "name": "Cyclic Organic Crudes",
+        "citations": 28
+      },
+      "1094": {
+        "name": "Uranium-Radium-Vanadium Ores",
+        "citations": 12
+      },
+      "2899": {
+        "name": "Chemical Preparations NEC",
+        "citations": 24
+      },
+      "2861": {
+        "name": "Gum and Wood Chemicals",
+        "citations": 13
+      },
+      "3312": {
+        "name": "Steel Works & Blast Furnaces",
+        "citations": 12
+      }
+    },
+    "2018": {
+      "2911": {
+        "name": "Petroleum Refining",
+        "citations": 227
+      },
+      "2869": {
+        "name": "Industrial Organic Chemicals",
+        "citations": 98
+      },
+      "2819": {
+        "name": "Industrial Inorganic Chemicals",
+        "citations": 97
+      },
+      "2821": {
+        "name": "Plastics Materials & Resins",
+        "citations": 53
+      },
+      "2873": {
+        "name": "Nitrogenous Fertilizers",
+        "citations": 47
+      },
+      "4925": {
+        "name": "Gas Production & Distribution",
+        "citations": 41
+      },
+      "2813": {
+        "name": "Industrial Gases",
+        "citations": 40
+      },
+      "5171": {
+        "name": "Petroleum Bulk Stations",
+        "citations": 34
+      },
+      "2865": {
+        "name": "Cyclic Organic Crudes",
+        "citations": 29
+      },
+      "1094": {
+        "name": "Uranium-Radium-Vanadium Ores",
+        "citations": 13
+      },
+      "2899": {
+        "name": "Chemical Preparations NEC",
+        "citations": 28
+      },
+      "2861": {
+        "name": "Gum and Wood Chemicals",
+        "citations": 16
+      },
+      "3312": {
+        "name": "Steel Works & Blast Furnaces",
+        "citations": 15
+      }
+    },
+    "2019": {
+      "2911": {
+        "name": "Petroleum Refining",
+        "citations": 178
+      },
+      "2869": {
+        "name": "Industrial Organic Chemicals",
+        "citations": 115
+      },
+      "2819": {
+        "name": "Industrial Inorganic Chemicals",
+        "citations": 70
+      },
+      "2821": {
+        "name": "Plastics Materials & Resins",
+        "citations": 48
+      },
+      "2873": {
+        "name": "Nitrogenous Fertilizers",
+        "citations": 50
+      },
+      "4925": {
+        "name": "Gas Production & Distribution",
+        "citations": 40
+      },
+      "2813": {
+        "name": "Industrial Gases",
+        "citations": 33
+      },
+      "5171": {
+        "name": "Petroleum Bulk Stations",
+        "citations": 29
+      },
+      "2865": {
+        "name": "Cyclic Organic Crudes",
+        "citations": 23
+      },
+      "1094": {
+        "name": "Uranium-Radium-Vanadium Ores",
+        "citations": 13
+      },
+      "2899": {
+        "name": "Chemical Preparations NEC",
+        "citations": 25
+      },
+      "2861": {
+        "name": "Gum and Wood Chemicals",
+        "citations": 14
+      },
+      "3312": {
+        "name": "Steel Works & Blast Furnaces",
+        "citations": 13
+      }
+    },
+    "2020": {
+      "2911": {
+        "name": "Petroleum Refining",
+        "citations": 107
+      },
+      "2869": {
+        "name": "Industrial Organic Chemicals",
+        "citations": 66
+      },
+      "2819": {
+        "name": "Industrial Inorganic Chemicals",
+        "citations": 50
+      },
+      "2821": {
+        "name": "Plastics Materials & Resins",
+        "citations": 34
+      },
+      "2873": {
+        "name": "Nitrogenous Fertilizers",
+        "citations": 32
+      },
+      "4925": {
+        "name": "Gas Production & Distribution",
+        "citations": 21
+      },
+      "2813": {
+        "name": "Industrial Gases",
+        "citations": 17
+      },
+      "5171": {
+        "name": "Petroleum Bulk Stations",
+        "citations": 17
+      },
+      "2865": {
+        "name": "Cyclic Organic Crudes",
+        "citations": 15
+      },
+      "1094": {
+        "name": "Uranium-Radium-Vanadium Ores",
+        "citations": 9
+      },
+      "2899": {
+        "name": "Chemical Preparations NEC",
+        "citations": 14
+      },
+      "2861": {
+        "name": "Gum and Wood Chemicals",
+        "citations": 8
+      },
+      "3312": {
+        "name": "Steel Works & Blast Furnaces",
+        "citations": 9
+      }
+    },
+    "2021": {
+      "2911": {
+        "name": "Petroleum Refining",
+        "citations": 159
+      },
+      "2869": {
+        "name": "Industrial Organic Chemicals",
+        "citations": 71
+      },
+      "2819": {
+        "name": "Industrial Inorganic Chemicals",
+        "citations": 66
+      },
+      "2821": {
+        "name": "Plastics Materials & Resins",
+        "citations": 37
+      },
+      "2873": {
+        "name": "Nitrogenous Fertilizers",
+        "citations": 31
+      },
+      "4925": {
+        "name": "Gas Production & Distribution",
+        "citations": 31
+      },
+      "2813": {
+        "name": "Industrial Gases",
+        "citations": 25
+      },
+      "5171": {
+        "name": "Petroleum Bulk Stations",
+        "citations": 29
+      },
+      "2865": {
+        "name": "Cyclic Organic Crudes",
+        "citations": 23
+      },
+      "1094": {
+        "name": "Uranium-Radium-Vanadium Ores",
+        "citations": 9
+      },
+      "2899": {
+        "name": "Chemical Preparations NEC",
+        "citations": 19
+      },
+      "2861": {
+        "name": "Gum and Wood Chemicals",
+        "citations": 9
+      },
+      "3312": {
+        "name": "Steel Works & Blast Furnaces",
+        "citations": 11
+      }
+    },
+    "2022": {
+      "2911": {
+        "name": "Petroleum Refining",
+        "citations": 165
+      },
+      "2869": {
+        "name": "Industrial Organic Chemicals",
+        "citations": 101
+      },
+      "2819": {
+        "name": "Industrial Inorganic Chemicals",
+        "citations": 67
+      },
+      "2821": {
+        "name": "Plastics Materials & Resins",
+        "citations": 48
+      },
+      "2873": {
+        "name": "Nitrogenous Fertilizers",
+        "citations": 50
+      },
+      "4925": {
+        "name": "Gas Production & Distribution",
+        "citations": 40
+      },
+      "2813": {
+        "name": "Industrial Gases",
+        "citations": 33
+      },
+      "5171": {
+        "name": "Petroleum Bulk Stations",
+        "citations": 29
+      },
+      "2865": {
+        "name": "Cyclic Organic Crudes",
+        "citations": 23
+      },
+      "1094": {
+        "name": "Uranium-Radium-Vanadium Ores",
+        "citations": 11
+      },
+      "2899": {
+        "name": "Chemical Preparations NEC",
+        "citations": 28
+      },
+      "2861": {
+        "name": "Gum and Wood Chemicals",
+        "citations": 11
+      },
+      "3312": {
+        "name": "Steel Works & Blast Furnaces",
+        "citations": 12
+      }
+    },
+    "2023": {
+      "2911": {
+        "name": "Petroleum Refining",
+        "citations": 170
+      },
+      "2869": {
+        "name": "Industrial Organic Chemicals",
+        "citations": 96
+      },
+      "2819": {
+        "name": "Industrial Inorganic Chemicals",
+        "citations": 96
+      },
+      "2821": {
+        "name": "Plastics Materials & Resins",
+        "citations": 58
+      },
+      "2873": {
+        "name": "Nitrogenous Fertilizers",
+        "citations": 54
+      },
+      "4925": {
+        "name": "Gas Production & Distribution",
+        "citations": 42
+      },
+      "2813": {
+        "name": "Industrial Gases",
+        "citations": 40
+      },
+      "5171": {
+        "name": "Petroleum Bulk Stations",
+        "citations": 33
+      },
+      "2865": {
+        "name": "Cyclic Organic Crudes",
+        "citations": 28
+      },
+      "1094": {
+        "name": "Uranium-Radium-Vanadium Ores",
+        "citations": 13
+      },
+      "2899": {
+        "name": "Chemical Preparations NEC",
+        "citations": 25
+      },
+      "2861": {
+        "name": "Gum and Wood Chemicals",
+        "citations": 15
+      },
+      "3312": {
+        "name": "Steel Works & Blast Furnaces",
+        "citations": 12
+      }
+    },
+    "2024": {
+      "2911": {
+        "name": "Petroleum Refining",
+        "citations": 235
+      },
+      "2869": {
+        "name": "Industrial Organic Chemicals",
+        "citations": 127
+      },
+      "2819": {
+        "name": "Industrial Inorganic Chemicals",
+        "citations": 85
+      },
+      "2821": {
+        "name": "Plastics Materials & Resins",
+        "citations": 57
+      },
+      "2873": {
+        "name": "Nitrogenous Fertilizers",
+        "citations": 59
+      },
+      "4925": {
+        "name": "Gas Production & Distribution",
+        "citations": 46
+      },
+      "2813": {
+        "name": "Industrial Gases",
+        "citations": 38
+      },
+      "5171": {
+        "name": "Petroleum Bulk Stations",
+        "citations": 37
+      },
+      "2865": {
+        "name": "Cyclic Organic Crudes",
+        "citations": 29
+      },
+      "1094": {
+        "name": "Uranium-Radium-Vanadium Ores",
+        "citations": 14
+      },
+      "2899": {
+        "name": "Chemical Preparations NEC",
+        "citations": 26
+      },
+      "2861": {
+        "name": "Gum and Wood Chemicals",
+        "citations": 14
+      },
+      "3312": {
+        "name": "Steel Works & Blast Furnaces",
+        "citations": 16
+      }
+    },
+    "2025": {
+      "2911": {
+        "name": "Petroleum Refining",
+        "citations": 186
+      },
+      "2869": {
+        "name": "Industrial Organic Chemicals",
+        "citations": 96
+      },
+      "2819": {
+        "name": "Industrial Inorganic Chemicals",
+        "citations": 72
+      },
+      "2821": {
+        "name": "Plastics Materials & Resins",
+        "citations": 55
+      },
+      "2873": {
+        "name": "Nitrogenous Fertilizers",
+        "citations": 46
+      },
+      "4925": {
+        "name": "Gas Production & Distribution",
+        "citations": 45
+      },
+      "2813": {
+        "name": "Industrial Gases",
+        "citations": 37
+      },
+      "5171": {
+        "name": "Petroleum Bulk Stations",
+        "citations": 35
+      },
+      "2865": {
+        "name": "Cyclic Organic Crudes",
+        "citations": 31
+      },
+      "1094": {
+        "name": "Uranium-Radium-Vanadium Ores",
+        "citations": 13
+      },
+      "2899": {
+        "name": "Chemical Preparations NEC",
+        "citations": 23
+      },
+      "2861": {
+        "name": "Gum and Wood Chemicals",
+        "citations": 12
+      },
+      "3312": {
+        "name": "Steel Works & Blast Furnaces",
+        "citations": 13
+      }
+    }
+  },
+  "penalties_by_year": {
+    "2016": {
+      "S": {
+        "name": "Serious",
+        "count": 726,
+        "avg_penalty": 14200,
+        "total_penalty": 10309200
+      },
+      "W": {
+        "name": "Willful",
+        "count": 50,
+        "avg_penalty": 131000,
+        "total_penalty": 6550000
+      },
+      "R": {
+        "name": "Repeat",
+        "count": 80,
+        "avg_penalty": 95000,
+        "total_penalty": 7600000
+      },
+      "O": {
+        "name": "Other-than-Serious",
+        "count": 151,
+        "avg_penalty": 1200,
+        "total_penalty": 181200
+      },
+      "total_penalty": 24640400,
+      "total_citations": 1009
+    },
+    "2017": {
+      "S": {
+        "name": "Serious",
+        "count": 470,
+        "avg_penalty": 14626,
+        "total_penalty": 6874220
+      },
+      "W": {
+        "name": "Willful",
+        "count": 32,
+        "avg_penalty": 134930,
+        "total_penalty": 4317760
+      },
+      "R": {
+        "name": "Repeat",
+        "count": 52,
+        "avg_penalty": 97850,
+        "total_penalty": 5088200
+      },
+      "O": {
+        "name": "Other-than-Serious",
+        "count": 97,
+        "avg_penalty": 1236,
+        "total_penalty": 119892
+      },
+      "total_penalty": 16400072,
+      "total_citations": 653
+    },
+    "2018": {
+      "S": {
+        "name": "Serious",
+        "count": 518,
+        "avg_penalty": 15052,
+        "total_penalty": 7796936
+      },
+      "W": {
+        "name": "Willful",
+        "count": 36,
+        "avg_penalty": 138860,
+        "total_penalty": 4998960
+      },
+      "R": {
+        "name": "Repeat",
+        "count": 57,
+        "avg_penalty": 100700,
+        "total_penalty": 5739900
+      },
+      "O": {
+        "name": "Other-than-Serious",
+        "count": 108,
+        "avg_penalty": 1272,
+        "total_penalty": 137376
+      },
+      "total_penalty": 18673172,
+      "total_citations": 720
+    },
+    "2019": {
+      "S": {
+        "name": "Serious",
+        "count": 489,
+        "avg_penalty": 15478,
+        "total_penalty": 7568742
+      },
+      "W": {
+        "name": "Willful",
+        "count": 34,
+        "avg_penalty": 142790,
+        "total_penalty": 4854860
+      },
+      "R": {
+        "name": "Repeat",
+        "count": 54,
+        "avg_penalty": 103550,
+        "total_penalty": 5591700
+      },
+      "O": {
+        "name": "Other-than-Serious",
+        "count": 102,
+        "avg_penalty": 1308,
+        "total_penalty": 133416
+      },
+      "total_penalty": 18148718,
+      "total_citations": 680
+    },
+    "2020": {
+      "S": {
+        "name": "Serious",
+        "count": 295,
+        "avg_penalty": 15904,
+        "total_penalty": 4691680
+      },
+      "W": {
+        "name": "Willful",
+        "count": 20,
+        "avg_penalty": 146720,
+        "total_penalty": 2934400
+      },
+      "R": {
+        "name": "Repeat",
+        "count": 32,
+        "avg_penalty": 106400,
+        "total_penalty": 3404800
+      },
+      "O": {
+        "name": "Other-than-Serious",
+        "count": 61,
+        "avg_penalty": 1344,
+        "total_penalty": 81984
+      },
+      "total_penalty": 11112864,
+      "total_citations": 410
+    },
+    "2021": {
+      "S": {
+        "name": "Serious",
+        "count": 374,
+        "avg_penalty": 16329,
+        "total_penalty": 6107419
+      },
+      "W": {
+        "name": "Willful",
+        "count": 26,
+        "avg_penalty": 150650,
+        "total_penalty": 3916900
+      },
+      "R": {
+        "name": "Repeat",
+        "count": 41,
+        "avg_penalty": 109249,
+        "total_penalty": 4479249
+      },
+      "O": {
+        "name": "Other-than-Serious",
+        "count": 78,
+        "avg_penalty": 1380,
+        "total_penalty": 107640
+      },
+      "total_penalty": 14611208,
+      "total_citations": 520
+    },
+    "2022": {
+      "S": {
+        "name": "Serious",
+        "count": 453,
+        "avg_penalty": 16756,
+        "total_penalty": 7590468
+      },
+      "W": {
+        "name": "Willful",
+        "count": 31,
+        "avg_penalty": 154580,
+        "total_penalty": 4791980
+      },
+      "R": {
+        "name": "Repeat",
+        "count": 50,
+        "avg_penalty": 112100,
+        "total_penalty": 5605000
+      },
+      "O": {
+        "name": "Other-than-Serious",
+        "count": 94,
+        "avg_penalty": 1416,
+        "total_penalty": 133104
+      },
+      "total_penalty": 18120552,
+      "total_citations": 630
+    },
+    "2023": {
+      "S": {
+        "name": "Serious",
+        "count": 511,
+        "avg_penalty": 17182,
+        "total_penalty": 8780002
+      },
+      "W": {
+        "name": "Willful",
+        "count": 35,
+        "avg_penalty": 158510,
+        "total_penalty": 5547850
+      },
+      "R": {
+        "name": "Repeat",
+        "count": 56,
+        "avg_penalty": 114950,
+        "total_penalty": 6437200
+      },
+      "O": {
+        "name": "Other-than-Serious",
+        "count": 106,
+        "avg_penalty": 1452,
+        "total_penalty": 153912
+      },
+      "total_penalty": 20918964,
+      "total_citations": 710
+    },
+    "2024": {
+      "S": {
+        "name": "Serious",
+        "count": 547,
+        "avg_penalty": 17608,
+        "total_penalty": 9631576
+      },
+      "W": {
+        "name": "Willful",
+        "count": 38,
+        "avg_penalty": 162440,
+        "total_penalty": 6172720
+      },
+      "R": {
+        "name": "Repeat",
+        "count": 60,
+        "avg_penalty": 117800,
+        "total_penalty": 7068000
+      },
+      "O": {
+        "name": "Other-than-Serious",
+        "count": 114,
+        "avg_penalty": 1488,
+        "total_penalty": 169632
+      },
+      "total_penalty": 23041928,
+      "total_citations": 760
+    },
+    "2025": {
+      "S": {
+        "name": "Serious",
+        "count": 496,
+        "avg_penalty": 18034,
+        "total_penalty": 8944864
+      },
+      "W": {
+        "name": "Willful",
+        "count": 34,
+        "avg_penalty": 166370,
+        "total_penalty": 5656580
+      },
+      "R": {
+        "name": "Repeat",
+        "count": 55,
+        "avg_penalty": 120650,
+        "total_penalty": 6635750
+      },
+      "O": {
+        "name": "Other-than-Serious",
+        "count": 103,
+        "avg_penalty": 1524,
+        "total_penalty": 156972
+      },
+      "total_penalty": 21394166,
+      "total_citations": 690
+    }
+  },
+  "mi_breakdown": {
+    "2016": {
+      "j2": {
+        "name": "Written Procedures",
+        "citations": 62
+      },
+      "j4": {
+        "name": "Inspection and Testing",
+        "citations": 48
+      },
+      "j3": {
+        "name": "Training for Maintenance",
+        "citations": 18
+      },
+      "j1": {
+        "name": "Application/Equipment List",
+        "citations": 11
+      },
+      "j5": {
+        "name": "Equipment Deficiencies",
+        "citations": 10
+      },
+      "j6": {
+        "name": "Quality Assurance",
+        "citations": 4
+      }
+    },
+    "2017": {
+      "j2": {
+        "name": "Written Procedures",
+        "citations": 43
+      },
+      "j4": {
+        "name": "Inspection and Testing",
+        "citations": 33
+      },
+      "j3": {
+        "name": "Training for Maintenance",
+        "citations": 12
+      },
+      "j1": {
+        "name": "Application/Equipment List",
+        "citations": 8
+      },
+      "j5": {
+        "name": "Equipment Deficiencies",
+        "citations": 7
+      },
+      "j6": {
+        "name": "Quality Assurance",
+        "citations": 4
+      }
+    },
+    "2018": {
+      "j2": {
+        "name": "Written Procedures",
+        "citations": 44
+      },
+      "j4": {
+        "name": "Inspection and Testing",
+        "citations": 34
+      },
+      "j3": {
+        "name": "Training for Maintenance",
+        "citations": 14
+      },
+      "j1": {
+        "name": "Application/Equipment List",
+        "citations": 8
+      },
+      "j5": {
+        "name": "Equipment Deficiencies",
+        "citations": 6
+      },
+      "j6": {
+        "name": "Quality Assurance",
+        "citations": 2
+      }
+    },
+    "2019": {
+      "j2": {
+        "name": "Written Procedures",
+        "citations": 46
+      },
+      "j4": {
+        "name": "Inspection and Testing",
+        "citations": 29
+      },
+      "j3": {
+        "name": "Training for Maintenance",
+        "citations": 13
+      },
+      "j1": {
+        "name": "Application/Equipment List",
+        "citations": 9
+      },
+      "j5": {
+        "name": "Equipment Deficiencies",
+        "citations": 7
+      },
+      "j6": {
+        "name": "Quality Assurance",
+        "citations": 4
+      }
+    },
+    "2020": {
+      "j2": {
+        "name": "Written Procedures",
+        "citations": 25
+      },
+      "j4": {
+        "name": "Inspection and Testing",
+        "citations": 19
+      },
+      "j3": {
+        "name": "Training for Maintenance",
+        "citations": 7
+      },
+      "j1": {
+        "name": "Application/Equipment List",
+        "citations": 4
+      },
+      "j5": {
+        "name": "Equipment Deficiencies",
+        "citations": 4
+      },
+      "j6": {
+        "name": "Quality Assurance",
+        "citations": 1
+      }
+    },
+    "2021": {
+      "j2": {
+        "name": "Written Procedures",
+        "citations": 35
+      },
+      "j4": {
+        "name": "Inspection and Testing",
+        "citations": 24
+      },
+      "j3": {
+        "name": "Training for Maintenance",
+        "citations": 10
+      },
+      "j1": {
+        "name": "Application/Equipment List",
+        "citations": 5
+      },
+      "j5": {
+        "name": "Equipment Deficiencies",
+        "citations": 5
+      },
+      "j6": {
+        "name": "Quality Assurance",
+        "citations": 2
+      }
+    },
+    "2022": {
+      "j2": {
+        "name": "Written Procedures",
+        "citations": 45
+      },
+      "j4": {
+        "name": "Inspection and Testing",
+        "citations": 29
+      },
+      "j3": {
+        "name": "Training for Maintenance",
+        "citations": 13
+      },
+      "j1": {
+        "name": "Application/Equipment List",
+        "citations": 8
+      },
+      "j5": {
+        "name": "Equipment Deficiencies",
+        "citations": 6
+      },
+      "j6": {
+        "name": "Quality Assurance",
+        "citations": 3
+      }
+    },
+    "2023": {
+      "j2": {
+        "name": "Written Procedures",
+        "citations": 46
+      },
+      "j4": {
+        "name": "Inspection and Testing",
+        "citations": 34
+      },
+      "j3": {
+        "name": "Training for Maintenance",
+        "citations": 12
+      },
+      "j1": {
+        "name": "Application/Equipment List",
+        "citations": 8
+      },
+      "j5": {
+        "name": "Equipment Deficiencies",
+        "citations": 6
+      },
+      "j6": {
+        "name": "Quality Assurance",
+        "citations": 4
+      }
+    },
+    "2024": {
+      "j2": {
+        "name": "Written Procedures",
+        "citations": 51
+      },
+      "j4": {
+        "name": "Inspection and Testing",
+        "citations": 38
+      },
+      "j3": {
+        "name": "Training for Maintenance",
+        "citations": 15
+      },
+      "j1": {
+        "name": "Application/Equipment List",
+        "citations": 8
+      },
+      "j5": {
+        "name": "Equipment Deficiencies",
+        "citations": 8
+      },
+      "j6": {
+        "name": "Quality Assurance",
+        "citations": 4
+      }
+    },
+    "2025": {
+      "j2": {
+        "name": "Written Procedures",
+        "citations": 45
+      },
+      "j4": {
+        "name": "Inspection and Testing",
+        "citations": 33
+      },
+      "j3": {
+        "name": "Training for Maintenance",
+        "citations": 14
+      },
+      "j1": {
+        "name": "Application/Equipment List",
+        "citations": 7
+      },
+      "j5": {
+        "name": "Equipment Deficiencies",
+        "citations": 6
+      },
+      "j6": {
+        "name": "Quality Assurance",
+        "citations": 3
+      }
+    }
+  },
+  "api754_tiers": {
+    "2016": {
+      "tier1": {
+        "name": "Tier 1 PSE (Major LOPC)",
+        "count": 94
+      },
+      "tier2": {
+        "name": "Tier 2 PSE (Minor LOPC)",
+        "count": 427
+      },
+      "tier3": {
+        "name": "Tier 3 (Near-miss/Demand on SIS)",
+        "count": 2757
+      },
+      "tier4": {
+        "name": "Tier 4 (System weakness)",
+        "count": 15771
+      }
+    },
+    "2017": {
+      "tier1": {
+        "name": "Tier 1 PSE (Major LOPC)",
+        "count": 80
+      },
+      "tier2": {
+        "name": "Tier 2 PSE (Minor LOPC)",
+        "count": 385
+      },
+      "tier3": {
+        "name": "Tier 3 (Near-miss/Demand on SIS)",
+        "count": 2486
+      },
+      "tier4": {
+        "name": "Tier 4 (System weakness)",
+        "count": 16740
+      }
+    },
+    "2018": {
+      "tier1": {
+        "name": "Tier 1 PSE (Major LOPC)",
+        "count": 99
+      },
+      "tier2": {
+        "name": "Tier 2 PSE (Minor LOPC)",
+        "count": 349
+      },
+      "tier3": {
+        "name": "Tier 3 (Near-miss/Demand on SIS)",
+        "count": 2756
+      },
+      "tier4": {
+        "name": "Tier 4 (System weakness)",
+        "count": 16291
+      }
+    },
+    "2019": {
+      "tier1": {
+        "name": "Tier 1 PSE (Major LOPC)",
+        "count": 81
+      },
+      "tier2": {
+        "name": "Tier 2 PSE (Minor LOPC)",
+        "count": 317
+      },
+      "tier3": {
+        "name": "Tier 3 (Near-miss/Demand on SIS)",
+        "count": 3287
+      },
+      "tier4": {
+        "name": "Tier 4 (System weakness)",
+        "count": 19604
+      }
+    },
+    "2020": {
+      "tier1": {
+        "name": "Tier 1 PSE (Major LOPC)",
+        "count": 85
+      },
+      "tier2": {
+        "name": "Tier 2 PSE (Minor LOPC)",
+        "count": 363
+      },
+      "tier3": {
+        "name": "Tier 3 (Near-miss/Demand on SIS)",
+        "count": 2844
+      },
+      "tier4": {
+        "name": "Tier 4 (System weakness)",
+        "count": 17237
+      }
+    },
+    "2021": {
+      "tier1": {
+        "name": "Tier 1 PSE (Major LOPC)",
+        "count": 102
+      },
+      "tier2": {
+        "name": "Tier 2 PSE (Minor LOPC)",
+        "count": 352
+      },
+      "tier3": {
+        "name": "Tier 3 (Near-miss/Demand on SIS)",
+        "count": 2478
+      },
+      "tier4": {
+        "name": "Tier 4 (System weakness)",
+        "count": 16774
+      }
+    },
+    "2022": {
+      "tier1": {
+        "name": "Tier 1 PSE (Major LOPC)",
+        "count": 67
+      },
+      "tier2": {
+        "name": "Tier 2 PSE (Minor LOPC)",
+        "count": 335
+      },
+      "tier3": {
+        "name": "Tier 3 (Near-miss/Demand on SIS)",
+        "count": 2426
+      },
+      "tier4": {
+        "name": "Tier 4 (System weakness)",
+        "count": 17670
+      }
+    },
+    "2023": {
+      "tier1": {
+        "name": "Tier 1 PSE (Major LOPC)",
+        "count": 74
+      },
+      "tier2": {
+        "name": "Tier 2 PSE (Minor LOPC)",
+        "count": 327
+      },
+      "tier3": {
+        "name": "Tier 3 (Near-miss/Demand on SIS)",
+        "count": 2921
+      },
+      "tier4": {
+        "name": "Tier 4 (System weakness)",
+        "count": 20837
+      }
+    },
+    "2024": {
+      "tier1": {
+        "name": "Tier 1 PSE (Major LOPC)",
+        "count": 88
+      },
+      "tier2": {
+        "name": "Tier 2 PSE (Minor LOPC)",
+        "count": 265
+      },
+      "tier3": {
+        "name": "Tier 3 (Near-miss/Demand on SIS)",
+        "count": 2980
+      },
+      "tier4": {
+        "name": "Tier 4 (System weakness)",
+        "count": 17792
+      }
+    },
+    "2025": {
+      "tier1": {
+        "name": "Tier 1 PSE (Major LOPC)",
+        "count": 78
+      },
+      "tier2": {
+        "name": "Tier 2 PSE (Minor LOPC)",
+        "count": 337
+      },
+      "tier3": {
+        "name": "Tier 3 (Near-miss/Demand on SIS)",
+        "count": 2576
+      },
+      "tier4": {
+        "name": "Tier 4 (System weakness)",
+        "count": 18282
+      }
+    }
+  },
+  "csb_incidents": [
+    {
+      "year": 2020,
+      "facility": "Valero Meraux Refinery",
+      "state": "LA",
+      "type": "H2/HC release",
+      "fatalities": 0,
+      "injuries": 2,
+      "damage_M": 45
+    },
+    {
+      "year": 2020,
+      "facility": "Indorama Ventures",
+      "state": "LA",
+      "type": "Explosion",
+      "fatalities": 1,
+      "injuries": 0,
+      "damage_M": 120
+    },
+    {
+      "year": 2020,
+      "facility": "Bio Lab",
+      "state": "LA",
+      "type": "Chemical fire",
+      "fatalities": 0,
+      "injuries": 1,
+      "damage_M": 30
+    },
+    {
+      "year": 2021,
+      "facility": "Chemtool Inc",
+      "state": "IL",
+      "type": "Explosion/fire",
+      "fatalities": 0,
+      "injuries": 1,
+      "damage_M": 80
+    },
+    {
+      "year": 2021,
+      "facility": "Yenkin-Majestic Paint",
+      "state": "OH",
+      "type": "Explosion",
+      "fatalities": 1,
+      "injuries": 8,
+      "damage_M": 25
+    },
+    {
+      "year": 2022,
+      "facility": "Pemex Deer Park",
+      "state": "TX",
+      "type": "LOPC fire",
+      "fatalities": 0,
+      "injuries": 0,
+      "damage_M": 55
+    },
+    {
+      "year": 2022,
+      "facility": "Packaging Corp",
+      "state": "AL",
+      "type": "Digester explosion",
+      "fatalities": 2,
+      "injuries": 8,
+      "damage_M": 65
+    },
+    {
+      "year": 2023,
+      "facility": "BASF TotalEnergies",
+      "state": "TX",
+      "type": "Tower collapse",
+      "fatalities": 0,
+      "injuries": 0,
+      "damage_M": 200
+    },
+    {
+      "year": 2023,
+      "facility": "Dow Louisiana",
+      "state": "LA",
+      "type": "EO explosion",
+      "fatalities": 0,
+      "injuries": 0,
+      "damage_M": 150
+    },
+    {
+      "year": 2023,
+      "facility": "First Quality Tissue",
+      "state": "PA",
+      "type": "Boiler explosion",
+      "fatalities": 1,
+      "injuries": 3,
+      "damage_M": 40
+    },
+    {
+      "year": 2024,
+      "facility": "INEOS Phenol",
+      "state": "AL",
+      "type": "Chemical release",
+      "fatalities": 2,
+      "injuries": 5,
+      "damage_M": 90
+    },
+    {
+      "year": 2024,
+      "facility": "Cenovus Superior",
+      "state": "WI",
+      "type": "Refinery explosion",
+      "fatalities": 1,
+      "injuries": 20,
+      "damage_M": 350
+    },
+    {
+      "year": 2025,
+      "facility": "Woodland Pulp Mill",
+      "state": "ME",
+      "type": "H2S release",
+      "fatalities": 1,
+      "injuries": 2,
+      "damage_M": 15
+    }
+  ],
+  "top_hhc": [
+    {
+      "name": "Chlorine",
+      "cas": "7782-50-5",
+      "tq_lbs": 1500,
+      "incidents_pct": 0.12
+    },
+    {
+      "name": "Anhydrous Ammonia",
+      "cas": "7664-41-7",
+      "tq_lbs": 10000,
+      "incidents_pct": 0.11
+    },
+    {
+      "name": "Propylene",
+      "cas": "115-07-1",
+      "tq_lbs": 10000,
+      "incidents_pct": 0.08
+    },
+    {
+      "name": "Ethylene Oxide",
+      "cas": "75-21-8",
+      "tq_lbs": 5000,
+      "incidents_pct": 0.07
+    },
+    {
+      "name": "Hydrogen Fluoride",
+      "cas": "7664-39-3",
+      "tq_lbs": 1000,
+      "incidents_pct": 0.06
+    },
+    {
+      "name": "Sulfur Dioxide",
+      "cas": "7446-09-5",
+      "tq_lbs": 5000,
+      "incidents_pct": 0.05
+    },
+    {
+      "name": "Methyl Isocyanate",
+      "cas": "624-83-9",
+      "tq_lbs": 250,
+      "incidents_pct": 0.04
+    },
+    {
+      "name": "Hydrogen Sulfide",
+      "cas": "7783-06-4",
+      "tq_lbs": 1500,
+      "incidents_pct": 0.06
+    },
+    {
+      "name": "Phosgene",
+      "cas": "75-44-5",
+      "tq_lbs": 100,
+      "incidents_pct": 0.03
+    },
+    {
+      "name": "Flammable liquids (bulk)",
+      "cas": "N/A",
+      "tq_lbs": 10000,
+      "incidents_pct": 0.22
+    }
+  ],
+  "yearly_totals": {
+    "2016": 1009,
+    "2017": 653,
+    "2018": 720,
+    "2019": 680,
+    "2020": 410,
+    "2021": 520,
+    "2022": 630,
+    "2023": 710,
+    "2024": 760,
+    "2025": 690
+  },
+  "psm_elements_ref": {
+    "f": {
+      "name": "Operating Procedures",
+      "section": "1910.119(f)",
+      "rank": 1
+    },
+    "j": {
+      "name": "Mechanical Integrity",
+      "section": "1910.119(j)",
+      "rank": 2
+    },
+    "d": {
+      "name": "Process Safety Information",
+      "section": "1910.119(d)",
+      "rank": 3
+    },
+    "e": {
+      "name": "Process Hazard Analysis",
+      "section": "1910.119(e)",
+      "rank": 4
+    },
+    "l": {
+      "name": "Management of Change",
+      "section": "1910.119(l)",
+      "rank": 5
+    },
+    "g": {
+      "name": "Training",
+      "section": "1910.119(g)",
+      "rank": 6
+    },
+    "m": {
+      "name": "Incident Investigation",
+      "section": "1910.119(m)",
+      "rank": 7
+    },
+    "o": {
+      "name": "Compliance Audits",
+      "section": "1910.119(o)",
+      "rank": 8
+    },
+    "c": {
+      "name": "Employee Participation",
+      "section": "1910.119(c)",
+      "rank": 9
+    },
+    "i": {
+      "name": "Pre-Startup Safety Review",
+      "section": "1910.119(i)",
+      "rank": 10
+    },
+    "h": {
+      "name": "Contractors",
+      "section": "1910.119(h)",
+      "rank": 11
+    },
+    "n": {
+      "name": "Emergency Planning",
+      "section": "1910.119(n)",
+      "rank": 12
+    },
+    "k": {
+      "name": "Hot Work Permits",
+      "section": "1910.119(k)",
+      "rank": 13
+    },
+    "p": {
+      "name": "Trade Secrets",
+      "section": "1910.119(p)",
+      "rank": 14
+    }
+  },
+  "sic_codes_ref": {
+    "2911": "Petroleum Refining",
+    "2869": "Industrial Organic Chemicals",
+    "2819": "Industrial Inorganic Chemicals",
+    "2821": "Plastics Materials & Resins",
+    "2873": "Nitrogenous Fertilizers",
+    "4925": "Gas Production & Distribution",
+    "2813": "Industrial Gases",
+    "5171": "Petroleum Bulk Stations",
+    "2865": "Cyclic Organic Crudes",
+    "1094": "Uranium-Radium-Vanadium Ores",
+    "2899": "Chemical Preparations NEC",
+    "2861": "Gum and Wood Chemicals",
+    "3312": "Steel Works & Blast Furnaces"
+  }
+}
