@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="fr" data-dim="hub">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PSM-X5 | Process Safety Management | AgenticX5</title>
+<meta name="description" content="PSM-X5: Plateforme agentique de sécurité des procédés. 14 agents IA couvrant les 14 éléments OSHA PSM.">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root{
+--bg:#050608;--bg2:#0a0c10;--bg3:#0f1116;
+--card:rgba(15,17,22,0.85);--card-h:rgba(22,25,35,0.95);
+--accent:#e94560;--accent2:#ff6b6b;--cyan:#06b6d4;
+--amber:#f59e0b;--emerald:#10b981;--rose:#f43f5e;
+--orange:#f97316;--blue:#3b82f6;--purple:#a855f7;
+--t1:#f8fafc;--t2:#94a3b8;--t3:#64748b;
+--border:rgba(233,69,96,0.15);--glow:rgba(233,69,96,0.25);
+--font:'Outfit',sans-serif;--mono:'JetBrains Mono',monospace;
+--max:1340px;
+--d1:#06b6d4;--d2:#f59e0b;--d3:#a855f7;--d4:#10b981;--d5:#e94560;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--t1);overflow-x:hidden;line-height:1.6}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
+
+/* ═══ NAV ═══ */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(5,6,8,0.95);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem}
+.nav-brand{display:flex;align-items:center;gap:10px;cursor:pointer;text-decoration:none}
+.nav-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--orange));display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:900;color:#fff;box-shadow:0 0 20px rgba(233,69,96,0.3)}
+.nav-title{font-weight:700;font-size:1rem;letter-spacing:-0.3px;color:var(--t1)}.nav-title .hl{color:var(--accent)}
+.nav-center{display:flex;gap:3px;background:rgba(255,255,255,0.04);border-radius:12px;padding:3px;overflow-x:auto}
+.nav-tab{padding:8px 16px;border-radius:10px;cursor:pointer;font-weight:500;font-size:0.78rem;transition:all .25s;border:1px solid transparent;color:var(--t3);display:flex;align-items:center;gap:6px;white-space:nowrap}
+.nav-tab:hover{background:rgba(255,255,255,0.06);color:var(--t1)}
+.nav-tab.active{color:var(--t1);border-color:var(--accent);background:rgba(233,69,96,0.12)}
+.nav-tab[data-d="d1"].active{border-color:var(--d1);background:rgba(6,182,212,0.12)}
+.nav-tab[data-d="d2"].active{border-color:var(--d2);background:rgba(245,158,11,0.12)}
+.nav-tab[data-d="d3"].active{border-color:var(--d3);background:rgba(168,85,247,0.12)}
+.nav-tab[data-d="d4"].active{border-color:var(--d4);background:rgba(16,185,129,0.12)}
+.nav-tab[data-d="d5"].active{border-color:var(--d5);background:rgba(233,69,96,0.12)}
+.nav-right{display:flex;gap:8px}
+.lang{padding:5px 12px;border-radius:8px;cursor:pointer;font-weight:600;font-size:0.72rem;border:1px solid var(--border);background:transparent;color:var(--t3);transition:all .2s;font-family:var(--font)}
+.lang.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* ═══ HUB ═══ */
+.hub{display:none;padding-top:64px;min-height:100vh;position:relative;overflow:hidden}
+.hub.on{display:block}
+.hub-hero{min-height:calc(100vh - 64px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;position:relative}
+.hub-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 35%,rgba(233,69,96,0.08) 0%,transparent 55%),radial-gradient(ellipse at 30% 60%,rgba(245,158,11,0.05) 0%,transparent 40%)}
+.hub-hero>*{position:relative;z-index:1}
+.hub-logo{width:100px;height:100px;border-radius:24px;background:linear-gradient(135deg,var(--accent),var(--orange));display:flex;align-items:center;justify-content:center;font-size:2.8rem;margin-bottom:1.5rem;box-shadow:0 0 60px rgba(233,69,96,0.3);border:2px solid rgba(233,69,96,0.3)}
+.hub h1{font-size:3.2rem;font-weight:900;letter-spacing:-2px;text-align:center;margin-bottom:0.3rem}
+.hub h1 .hl{background:linear-gradient(135deg,var(--accent),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hub .tagline{color:var(--t2);font-size:1.05rem;text-align:center;max-width:700px;margin-bottom:2.5rem}
+
+/* HUB GRID */
+.hub-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:14px;max-width:1260px;width:100%;padding:0 1rem}
+.hub-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.4rem;cursor:pointer;transition:all .4s;position:relative;overflow:hidden}
+.hub-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .3s}
+.hub-card:hover{transform:translateY(-6px);border-color:rgba(233,69,96,0.35);box-shadow:0 20px 50px rgba(0,0,0,0.5)}
+.hub-card:hover::after{opacity:1}
+.hc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.7rem}
+.hc-icon{font-size:1.8rem}
+.hc-num{font-family:var(--mono);font-size:1rem;font-weight:700;padding:2px 8px;border-radius:6px;background:rgba(233,69,96,0.12);color:var(--accent)}
+.hub-card h3{font-size:0.92rem;font-weight:700;margin-bottom:0.3rem}
+.hub-card p{color:var(--t2);font-size:0.78rem;line-height:1.4}
+.hc-agent{margin-top:0.6rem;padding:3px 10px;border-radius:6px;font-size:0.65rem;font-weight:600;background:rgba(6,182,212,0.12);color:var(--cyan);display:inline-block}
+
+/* ═══ DIMENSIONS ═══ */
+.dim{display:none;padding-top:64px}.dim.on{display:block}
+.sec{padding:3rem 1.5rem}.mx{max-width:var(--max);margin:0 auto}
+.sec h2{font-size:1.8rem;font-weight:800;letter-spacing:-0.8px;margin-bottom:0.4rem}
+.sec .sub{color:var(--t2);font-size:0.92rem;max-width:680px;margin-bottom:2rem}
+
+/* HERO */
+.dhero{padding:5rem 2rem 3rem;text-align:center;position:relative;overflow:hidden}
+.dhero::before{content:'';position:absolute;inset:0}
+.dhero.h1::before{background:radial-gradient(ellipse at 50% 40%,rgba(6,182,212,0.08),transparent 55%)}
+.dhero.h2::before{background:radial-gradient(ellipse at 50% 40%,rgba(245,158,11,0.08),transparent 55%)}
+.dhero.h3::before{background:radial-gradient(ellipse at 50% 40%,rgba(168,85,247,0.08),transparent 55%)}
+.dhero.h4::before{background:radial-gradient(ellipse at 50% 40%,rgba(16,185,129,0.08),transparent 55%)}
+.dhero.h5::before{background:radial-gradient(ellipse at 50% 40%,rgba(233,69,96,0.08),transparent 55%)}
+.dhero>*{position:relative;z-index:1}
+.dbadge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:20px;font-size:0.72rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:1rem}
+.dbadge.b1{background:rgba(6,182,212,0.12);color:var(--d1);border:1px solid rgba(6,182,212,0.25)}
+.dbadge.b2{background:rgba(245,158,11,0.12);color:var(--d2);border:1px solid rgba(245,158,11,0.25)}
+.dbadge.b3{background:rgba(168,85,247,0.12);color:var(--d3);border:1px solid rgba(168,85,247,0.25)}
+.dbadge.b4{background:rgba(16,185,129,0.12);color:var(--d4);border:1px solid rgba(16,185,129,0.25)}
+.dbadge.b5{background:rgba(233,69,96,0.12);color:var(--d5);border:1px solid rgba(233,69,96,0.25)}
+.dhero h1{font-size:2.4rem;font-weight:900;letter-spacing:-1.5px;margin-bottom:0.8rem}
+.dhero .hl{background:linear-gradient(135deg,var(--accent),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.dhero p{color:var(--t2);font-size:1rem;max-width:680px;margin:0 auto}
+
+/* ═══ STATS ═══ */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin:2rem 0}
+.st{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.1rem;text-align:center}
+.st-v{font-size:1.6rem;font-weight:800;font-family:var(--mono)}
+.st-v.c1{color:var(--d1)}.st-v.c2{color:var(--d2)}.st-v.c3{color:var(--d3)}.st-v.cg{color:var(--emerald)}.st-v.cr{color:var(--rose)}.st-v.ca{color:var(--accent)}
+.st-l{font-size:0.72rem;color:var(--t2);margin-top:3px}
+
+/* ═══ CARDS ═══ */
+.g{display:grid;gap:16px}.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.cd{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.4rem;transition:all .3s}
+.cd:hover{border-color:rgba(233,69,96,0.3);transform:translateY(-2px)}
+.cd h4{font-size:0.95rem;font-weight:700;margin-bottom:0.4rem}
+.cd .tx{color:var(--t2);font-size:0.82rem;line-height:1.5}
+.tg{display:inline-block;padding:3px 10px;border-radius:6px;font-size:0.68rem;font-weight:600}
+
+/* ═══ TABLES ═══ */
+.tb{width:100%;border-collapse:collapse;font-size:0.82rem}
+.tb th{background:rgba(233,69,96,0.08);color:var(--accent);font-weight:600;text-align:left;padding:10px 12px;border-bottom:2px solid var(--border)}
+.tb td{padding:9px 12px;border-bottom:1px solid rgba(255,255,255,0.03)}
+.tb tr:hover td{background:rgba(255,255,255,0.015)}
+.bd{display:inline-block;padding:2px 9px;border-radius:6px;font-size:0.7rem;font-weight:600}
+.bd-g{background:rgba(16,185,129,0.2);color:#2dd4bf}.bd-y{background:rgba(245,158,11,0.2);color:#fbbf24}.bd-r{background:rgba(244,63,94,0.2);color:#fb7185}.bd-b{background:rgba(59,130,246,0.2);color:#60a5fa}
+
+/* ═══ TABS ═══ */
+.tabs{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:1.2rem;background:rgba(255,255,255,0.03);padding:3px;border-radius:10px;width:fit-content}
+.tab{padding:7px 16px;border-radius:8px;cursor:pointer;font-weight:500;font-size:0.8rem;color:var(--t3);transition:all .2s;border:1px solid transparent}
+.tab:hover{color:var(--t1);background:rgba(255,255,255,0.05)}
+.tab.on{background:rgba(233,69,96,0.15);color:var(--t1);border-color:var(--accent)}
+
+/* ═══ CHARTS ═══ */
+.chw{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.4rem;margin:1.5rem 0}
+.chw canvas{width:100%!important;max-height:340px}
+.cht{font-size:0.8rem;font-weight:600;color:var(--t3);margin-bottom:10px;letter-spacing:0.5px;text-transform:uppercase}
+
+/* ═══ PIPELINE ═══ */
+.pipe{display:flex;align-items:center;gap:0;margin:1.5rem 0;padding:1.5rem;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow-x:auto}
+.pn{display:flex;flex-direction:column;align-items:center;min-width:90px}
+.pi{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;border:2px solid;animation:pp 2.5s infinite;background:var(--bg)}
+@keyframes pp{0%,100%{box-shadow:0 0 0 0 rgba(233,69,96,0.3)}50%{box-shadow:0 0 16px 5px rgba(233,69,96,0.06)}}
+.pl{font-size:0.68rem;font-weight:600;margin-top:5px;text-align:center}.pt{font-size:0.58rem;color:var(--t3);font-family:var(--mono)}
+.pa{width:28px;height:2px;background:linear-gradient(90deg,var(--accent),var(--cyan));position:relative;flex-shrink:0}
+.pa::after{content:'▸';position:absolute;right:-5px;top:-7px;font-size:0.6rem;color:var(--cyan)}
+
+/* ═══ HAZOP TABLE ═══ */
+.hazop-grid{display:grid;gap:12px;margin:1.5rem 0}
+.hazop-row{display:grid;grid-template-columns:80px 100px 1fr 1fr 1fr 100px;gap:1px;background:rgba(255,255,255,0.03);border-radius:12px;overflow:hidden;font-size:0.78rem;border:1px solid var(--border);transition:all .3s}
+.hazop-row:hover{border-color:var(--d1)}
+.hazop-row.header{background:rgba(6,182,212,0.08);font-weight:700;color:var(--d1);border-color:var(--d1)}
+.hazop-cell{padding:10px 12px;background:var(--card)}
+.hazop-row.header .hazop-cell{background:transparent}
+.rpl{font-size:0.72rem;font-weight:700;padding:3px 8px;border-radius:5px;display:inline-block}
+.rpl-h{background:rgba(244,63,94,0.15);color:var(--rose)}
+.rpl-m{background:rgba(245,158,11,0.15);color:var(--amber)}
+.rpl-l{background:rgba(16,185,129,0.15);color:var(--emerald)}
+
+/* ═══ MOC WORKFLOW ═══ */
+.moc-flow{display:flex;flex-direction:column;gap:0;margin:1.5rem 0;position:relative;padding-left:24px}
+.moc-step{position:relative;padding:14px 0 14px 28px;border-left:2px solid rgba(255,255,255,0.06);transition:all .5s}
+.moc-step.active{border-left-color:var(--amber)}
+.moc-step.done{border-left-color:var(--emerald)}
+.moc-step.pending{opacity:0.4}
+.moc-dot{position:absolute;left:-8px;top:18px;width:14px;height:14px;border-radius:50%;border:2px solid var(--border);background:var(--bg);transition:all .4s}
+.moc-step.active .moc-dot{border-color:var(--amber);background:var(--amber);box-shadow:0 0 14px var(--amber)}
+.moc-step.done .moc-dot{border-color:var(--emerald);background:var(--emerald)}
+.moc-time{font-family:var(--mono);font-size:0.7rem;color:var(--cyan);font-weight:600}
+.moc-agent{font-size:0.75rem;font-weight:700;margin:2px 0}
+.moc-desc{font-size:0.75rem;color:var(--t2)}
+.moc-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.moc-tag{padding:2px 8px;border-radius:4px;font-size:0.62rem;font-weight:600}
+
+/* ═══ SIS GAUGES ═══ */
+.sis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:1.5rem 0}
+.sis-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.2rem;text-align:center;transition:all .3s}
+.sis-card.alert{border-color:var(--rose);animation:sisAlert 1.5s infinite}
+@keyframes sisAlert{0%,100%{box-shadow:0 0 0 0 rgba(244,63,94,0)}50%{box-shadow:0 0 14px 3px rgba(244,63,94,0.15)}}
+.sis-val{font-size:1.5rem;font-weight:800;font-family:var(--mono)}
+.sis-lbl{font-size:0.72rem;color:var(--t2);margin-top:4px}
+.sis-bar{width:100%;height:6px;background:rgba(255,255,255,0.05);border-radius:3px;margin-top:8px;overflow:hidden}
+.sis-fill{height:100%;border-radius:3px;transition:width .5s}
+
+/* ═══ AUDIT SCORING ═══ */
+.audit-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin:1.5rem 0}
+.audit-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1rem;transition:all .3s;cursor:pointer}
+.audit-card:hover{border-color:var(--d4);transform:translateY(-2px)}
+.audit-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.audit-num{font-family:var(--mono);font-size:0.8rem;font-weight:700;color:var(--accent);background:rgba(233,69,96,0.12);padding:2px 8px;border-radius:5px}
+.audit-score{font-family:var(--mono);font-size:1.1rem;font-weight:800}
+.audit-bar{width:100%;height:5px;background:rgba(255,255,255,0.05);border-radius:3px;margin-top:6px}
+.audit-fill{height:100%;border-radius:3px;transition:width 1s}
+
+/* ═══ CTA ═══ */
+.cta{text-align:center;padding:2.5rem 1.5rem;margin:2rem 0;background:linear-gradient(135deg,rgba(233,69,96,0.06),rgba(245,158,11,0.04));border:1px solid var(--border);border-radius:20px}
+.cta h3{font-size:1.4rem;font-weight:800;margin-bottom:0.4rem}.cta p{color:var(--t2);margin-bottom:1.2rem}
+.cta-b{display:inline-block;padding:12px 28px;background:var(--accent);color:#fff;text-decoration:none;border-radius:12px;font-weight:700;font-size:0.92rem;transition:all .3s}
+.cta-b:hover{background:var(--accent2);transform:translateY(-3px);box-shadow:0 12px 40px var(--glow)}
+
+/* Scenario Play */
+.play-btn{padding:7px 16px;border-radius:8px;font-size:0.78rem;font-weight:600;border:1px solid var(--accent);background:rgba(233,69,96,0.12);color:var(--accent);cursor:pointer;font-family:var(--font);transition:all .2s}
+.play-btn:hover{background:rgba(233,69,96,0.25)}
+.scenario-clock{font-family:var(--mono);font-size:1rem;font-weight:700;color:var(--cyan)}
+
+/* ═══ BOWTIE ═══ */
+.bowtie-wrap{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin:1.5rem 0;overflow:hidden}
+.bowtie-svg{width:100%;display:block}
+
+/* ═══ AI PANEL ═══ */
+.ai-panel{background:var(--card);border:1px solid var(--accent);border-radius:16px;padding:1.5rem;margin:1.5rem 0;position:relative;overflow:hidden}
+.ai-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--cyan),var(--accent))}
+.ai-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(233,69,96,0.12);border:1px solid rgba(233,69,96,0.25);color:var(--accent);border-radius:20px;padding:4px 12px;font-size:.72rem;font-weight:600;letter-spacing:0.5px;margin-bottom:12px}
+.ai-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pp 1.5s infinite}
+.ai-content{font-size:.88rem;line-height:1.7;color:var(--t2)}
+.ai-content h4{color:var(--t1);font-size:.95rem;margin:14px 0 6px}
+.ai-content strong{color:var(--t1)}
+.ai-loading{text-align:center;padding:2rem}
+.ai-loading .spin{display:inline-block;width:32px;height:32px;border:3px solid rgba(233,69,96,0.2);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ai-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:12px;border:1px solid var(--accent);background:rgba(233,69,96,0.08);color:var(--accent);cursor:pointer;font-family:var(--font);font-size:.88rem;font-weight:600;transition:all .3s;margin-top:10px}
+.ai-btn:hover{background:var(--accent);color:#fff;transform:translateY(-2px);box-shadow:0 8px 20px rgba(233,69,96,0.3)}
+.ai-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;box-shadow:none}
+.ai-scenario-input{width:100%;min-height:80px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;color:var(--t1);font-family:var(--font);font-size:.85rem;padding:12px;resize:vertical;margin:8px 0}
+.ai-scenario-input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px rgba(233,69,96,0.15)}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:900px){
+.nav-center{display:none}
+.hub-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+.g2,.g3,.g4{grid-template-columns:1fr}
+.hazop-row{grid-template-columns:1fr;font-size:0.75rem}
+.hazop-row.header{display:none}
+.pipe{flex-wrap:wrap;justify-content:center}
+}
+
+.hub-footer{margin-top:2rem;padding-bottom:2rem;text-align:center;color:var(--t3);font-size:0.78rem}
+.hub-footer a{color:var(--accent);text-decoration:none}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav class="nav">
+  <a class="nav-brand" onclick="go('hub')">
+    <div class="nav-icon">⚠</div>
+    <div class="nav-title"><span class="hl">PSM</span>-X5</div>
+  </a>
+  <div class="nav-center">
+    <div class="nav-tab active" data-d="hub" onclick="go('hub')">🏠 Hub</div>
+    <div class="nav-tab" data-d="d1" onclick="go('d1')">🔬 HAZOP/PHA</div>
+    <div class="nav-tab" data-d="d2" onclick="go('d2')">🔄 MOC & PSSR</div>
+    <div class="nav-tab" data-d="d3" onclick="go('d3')">🛡️ SIS/SIL</div>
+    <div class="nav-tab" data-d="d4" onclick="go('d4')">📋 Audit 14E</div>
+    <div class="nav-tab" data-d="d5" onclick="go('d5')">🤖 Agents</div>
+  </div>
+  <div class="nav-right">
+    <button class="lang on" onclick="setLang('fr')">FR</button>
+    <button class="lang" onclick="setLang('en')">EN</button>
+  </div>
+</nav>
+
+<!-- ═══════════ HUB ═══════════ -->
+<div id="hub" class="hub on">
+<div class="hub-hero">
+  <div class="hub-logo">⚠️</div>
+  <h1><span class="hl">PSM</span>-X5</h1>
+  <h1 style="font-size:1.4rem;font-weight:400;color:var(--t2);margin-bottom:0.5rem" data-fr="Process Safety Management Agentique" data-en="Agentic Process Safety Management">Process Safety Management Agentique</h1>
+  <p class="tagline" data-fr="14 agents IA orchestrés couvrant les 14 éléments OSHA PSM. Agnostique : mines, pétrochimie, raffinage, énergie, manufacturing. Du réactif au prédictif." data-en="14 orchestrated AI agents covering all 14 OSHA PSM elements. Industry-agnostic: mining, petrochemical, refining, energy, manufacturing. From reactive to predictive.">14 agents IA orchestrés couvrant les 14 éléments OSHA PSM. Agnostique : mines, pétrochimie, raffinage, énergie, manufacturing. Du réactif au prédictif.</p>
+
+  <div class="stats" style="max-width:900px;width:100%">
+    <div class="st"><div class="st-v ca" id="cnt14">0</div><div class="st-l" data-fr="Éléments PSM" data-en="PSM Elements">Éléments PSM</div></div>
+    <div class="st"><div class="st-v c1" id="cnt14a">0</div><div class="st-l" data-fr="Agents IA" data-en="AI Agents">Agents IA</div></div>
+    <div class="st"><div class="st-v c2">40+</div><div class="st-l" data-fr="Normes unifiées" data-en="Unified Standards">Normes unifiées</div></div>
+    <div class="st"><div class="st-v cg">-80%</div><div class="st-l" data-fr="Temps MOC" data-en="MOC Time">Temps MOC</div></div>
+    <div class="st"><div class="st-v cr"><5min</div><div class="st-l" data-fr="Bow-Tie auto" data-en="Auto Bow-Tie">Bow-Tie auto</div></div>
+    <div class="st"><div class="st-v c3"><2h</div><div class="st-l" data-fr="Pack audit" data-en="Audit Pack">Pack audit</div></div>
+  </div>
+
+  <div class="hub-grid" id="hubGrid"></div>
+
+  <div class="hub-footer" style="margin-top:2.5rem">
+    <span data-fr="PSM-X5 — Plateforme #26 de l'écosystème" data-en="PSM-X5 — Platform #26 in the ecosystem">PSM-X5 — Plateforme #26 de l'écosystème</span> <a href="#">AgenticX5</a> · genaisafety.online
+  </div>
+</div>
+</div>
+
+<!-- ═══════════ D1 — HAZOP/PHA ═══════════ -->
+<div id="d1" class="dim">
+  <div class="dhero h1">
+    <div class="dbadge b1">🔬 <span data-fr="DIMENSION 1 — ANALYSE DANGERS" data-en="DIMENSION 1 — HAZARD ANALYSIS">DIMENSION 1 — ANALYSE DANGERS</span></div>
+    <h1><span class="hl">HAZOP/PHA</span> Engine</h1>
+    <p data-fr="Agent A3-PHA-Engine : HAZOP assisté IA, génération noeuds-déviations, LOPA semi-quantitatif, Bow-Tie automatisé <5 min." data-en="Agent A3-PHA-Engine: AI-assisted HAZOP, node-deviation generation, semi-quantitative LOPA, automated Bow-Tie <5 min.">Agent A3-PHA-Engine : HAZOP assisté IA, génération noeuds-déviations, LOPA semi-quantitatif, Bow-Tie automatisé <5 min.</p>
+  </div>
+
+  <div class="sec"><div class="mx">
+    <h2 data-fr="Générateur HAZOP IA" data-en="AI HAZOP Generator">Générateur HAZOP IA</h2>
+    <p class="sub" data-fr="Sélectionnez un noeud d'étude pour générer automatiquement les déviations, causes et conséquences à partir du Knowledge Graph SafetyGraph (22M+ incidents)." data-en="Select a study node to auto-generate deviations, causes and consequences from the SafetyGraph Knowledge Graph (22M+ incidents).">Sélectionnez un noeud d'étude pour générer automatiquement les déviations, causes et conséquences à partir du Knowledge Graph SafetyGraph (22M+ incidents).</p>
+
+    <div class="tabs" id="hazopNodeTabs"></div>
+    <div id="hazopContent"></div>
+
+    <!-- BOW-TIE -->
+    <h2 style="margin-top:2.5rem" data-fr="Bow-Tie Automatisé" data-en="Automated Bow-Tie">Bow-Tie Automatisé</h2>
+    <p class="sub" data-fr="Diagramme Bow-Tie généré en <5 minutes à partir de l'analyse HAZOP ci-dessus." data-en="Bow-Tie diagram generated in <5 minutes from the HAZOP analysis above.">Diagramme Bow-Tie généré en <5 minutes à partir de l'analyse HAZOP ci-dessus.</p>
+    <div class="bowtie-wrap">
+      <svg id="bowtieSvg" class="bowtie-svg" viewBox="0 0 900 320"></svg>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats">
+      <div class="st"><div class="st-v c1">-60%</div><div class="st-l" data-fr="Durée HAZOP" data-en="HAZOP Duration">Durée HAZOP</div></div>
+      <div class="st"><div class="st-v c2">95%</div><div class="st-l" data-fr="Couverture scénarios" data-en="Scenario Coverage">Couverture scénarios</div></div>
+      <div class="st"><div class="st-v cg"><5min</div><div class="st-l" data-fr="Bow-Tie auto" data-en="Auto Bow-Tie">Bow-Tie auto</div></div>
+      <div class="st"><div class="st-v c3">22M+</div><div class="st-l" data-fr="Incidents corrélés" data-en="Correlated Incidents">Incidents corrélés</div></div>
+    </div>
+    <!-- AI HAZOP -->
+    <div class="ai-panel" style="margin-top:2rem">
+      <div class="ai-badge"><span class="dot"></span> CLAUDE API — A3-PHA-Engine</div>
+      <h2 style="font-size:1.2rem;margin-bottom:0.5rem" data-fr="🧠 HAZOP IA Assisté" data-en="🧠 AI-Assisted HAZOP">🧠 HAZOP IA Assisté</h2>
+      <p style="font-size:.85rem;color:var(--t2);margin-bottom:1rem" data-fr="Décrivez un procédé ou un équipement. L'IA génère les déviations, causes, conséquences et protections selon IEC 61882." data-en="Describe a process or equipment. AI generates deviations, causes, consequences and safeguards per IEC 61882.">Décrivez un procédé ou un équipement. L'IA génère les déviations, causes, conséquences et protections selon IEC 61882.</p>
+      <textarea class="ai-scenario-input" id="hazopInput" placeholder="Ex: Réacteur batch avec alimentation acide sulfurique, chauffage vapeur, agitation mécanique. Température opératoire 85°C, pression atmosphérique. Relief valve PSV-101 setpoint 2 barg."></textarea>
+      <button class="ai-btn" id="hazopAiBtn" onclick="generateAIHazop()">🔬 Générer HAZOP IA</button>
+      <div id="hazopAiResult" class="ai-content" style="margin-top:1rem"></div>
+    </div>
+
+  </div></div>
+
+  <div class="cta"><h3 data-fr="LOPA quantifié en temps réel" data-en="Real-time quantified LOPA">LOPA quantifié en temps réel</h3><p data-fr="Couches de protection indépendantes (IPL) calculées automatiquement avec PFD et SIL vérification." data-en="Independent Protection Layers (IPL) automatically computed with PFD and SIL verification.">Couches de protection indépendantes (IPL) calculées automatiquement avec PFD et SIL vérification.</p></div>
+</div>
+
+<!-- ═══════════ D2 — MOC & PSSR ═══════════ -->
+<div id="d2" class="dim">
+  <div class="dhero h2">
+    <div class="dbadge b2">🔄 <span data-fr="DIMENSION 2 — GESTION CHANGEMENTS" data-en="DIMENSION 2 — CHANGE MANAGEMENT">DIMENSION 2 — GESTION CHANGEMENTS</span></div>
+    <h1><span class="hl">MOC</span> & PSSR Workflow</h1>
+    <p data-fr="Agents A7-PSSR et A10-MOC : workflow complet Management of Change, évaluation impact automatique, Pre-Startup Safety Review dynamique." data-en="Agents A7-PSSR and A10-MOC: complete Management of Change workflow, automatic impact assessment, dynamic Pre-Startup Safety Review.">Agents A7-PSSR et A10-MOC : workflow complet Management of Change, évaluation impact automatique, Pre-Startup Safety Review dynamique.</p>
+  </div>
+
+  <div class="sec"><div class="mx">
+    <h2 data-fr="Simulation MOC Live" data-en="Live MOC Simulation">Simulation MOC Live</h2>
+    <p class="sub" data-fr="Scénario : Remplacement d'un catalyseur dans un réacteur de craquage. Observez le workflow MOC orchestré par les agents IA en temps réel." data-en="Scenario: Catalyst replacement in a cracking reactor. Watch the MOC workflow orchestrated by AI agents in real time.">Scénario : Remplacement d'un catalyseur dans un réacteur de craquage. Observez le workflow MOC orchestré par les agents IA en temps réel.</p>
+
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:1rem">
+      <button class="play-btn" onclick="startMOC()" id="mocPlayBtn">▶ Lancer simulation</button>
+      <span class="scenario-clock" id="mocClock">00:00</span>
+      <span class="bd bd-y" id="mocStatus" data-fr="En attente" data-en="Waiting">En attente</span>
+    </div>
+
+    <div class="moc-flow" id="mocFlow"></div>
+
+    <!-- PSSR -->
+    <h2 style="margin-top:2.5rem" data-fr="Checklist PSSR Dynamique" data-en="Dynamic PSSR Checklist">Checklist PSSR Dynamique</h2>
+    <p class="sub" data-fr="Générée automatiquement par A7-PSSR en fonction du type de changement MOC." data-en="Automatically generated by A7-PSSR based on MOC change type.">Générée automatiquement par A7-PSSR en fonction du type de changement MOC.</p>
+    <div id="pssrChecklist"></div>
+
+    <div class="stats">
+      <div class="st"><div class="st-v c2">-80%</div><div class="st-l" data-fr="Temps MOC" data-en="MOC Time">Temps MOC</div></div>
+      <div class="st"><div class="st-v cg">100%</div><div class="st-l" data-fr="PSI mis à jour" data-en="PSI Updated">PSI mis à jour</div></div>
+      <div class="st"><div class="st-v c1">Auto</div><div class="st-l" data-fr="Notifications" data-en="Notifications">Notifications</div></div>
+      <div class="st"><div class="st-v c3">PROV-O</div><div class="st-l" data-fr="Traçabilité" data-en="Traceability">Traçabilité</div></div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ═══════════ D3 — SIS/SIL ═══════════ -->
+<div id="d3" class="dim">
+  <div class="dhero h3">
+    <div class="dbadge b3">🛡️ <span data-fr="DIMENSION 3 — INTÉGRITÉ MÉCANIQUE" data-en="DIMENSION 3 — MECHANICAL INTEGRITY">DIMENSION 3 — INTÉGRITÉ MÉCANIQUE</span></div>
+    <h1><span class="hl">SIS/SIL</span> Monitoring</h1>
+    <p data-fr="Agent A8-MechInt : surveillance intégrité mécanique, vérification SIL IEC 61511, monitoring PFD temps réel, maintenance prédictive IoT." data-en="Agent A8-MechInt: mechanical integrity monitoring, SIL verification IEC 61511, real-time PFD monitoring, predictive IoT maintenance.">Agent A8-MechInt : surveillance intégrité mécanique, vérification SIL IEC 61511, monitoring PFD temps réel, maintenance prédictive IoT.</p>
+  </div>
+
+  <div class="sec"><div class="mx">
+    <h2 data-fr="Safety Instrumented Functions — Live" data-en="Safety Instrumented Functions — Live">Safety Instrumented Functions — Live</h2>
+    <p class="sub" data-fr="Monitoring temps réel des fonctions instrumentées de sécurité. Alertes prédictives avant dégradation sous SIL cible." data-en="Real-time monitoring of safety instrumented functions. Predictive alerts before degradation below target SIL.">Monitoring temps réel des fonctions instrumentées de sécurité. Alertes prédictives avant dégradation sous SIL cible.</p>
+
+    <div class="sis-grid" id="sisGrid"></div>
+
+    <!-- SIL Chart -->
+    <div class="chw">
+      <div class="cht" data-fr="TENDANCE PFD — 90 DERNIERS JOURS" data-en="PFD TREND — LAST 90 DAYS">TENDANCE PFD — 90 DERNIERS JOURS</div>
+      <canvas id="silChart" height="240"></canvas>
+    </div>
+
+    <div class="stats">
+      <div class="st"><div class="st-v c3">IEC 61511</div><div class="st-l">Standard</div></div>
+      <div class="st"><div class="st-v cg">98.2%</div><div class="st-l" data-fr="SIF conformes" data-en="Compliant SIFs">SIF conformes</div></div>
+      <div class="st"><div class="st-v c2">IoT</div><div class="st-l" data-fr="Monitoring" data-en="Monitoring">Monitoring</div></div>
+      <div class="st"><div class="st-v cr">-72%</div><div class="st-l" data-fr="Pannes imprévues" data-en="Unplanned Failures">Pannes imprévues</div></div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ═══════════ D4 — AUDIT 14 ÉLÉMENTS ═══════════ -->
+<div id="d4" class="dim">
+  <div class="dhero h4">
+    <div class="dbadge b4">📋 <span data-fr="DIMENSION 4 — CONFORMITÉ CONTINUE" data-en="DIMENSION 4 — CONTINUOUS COMPLIANCE">DIMENSION 4 — CONFORMITÉ CONTINUE</span></div>
+    <h1><span class="hl">Audit</span> 14 Éléments</h1>
+    <p data-fr="Agent A13-Audit : scoring conformité continu pour chacun des 14 éléments PSM. Pack évidence généré en <2h. Traçabilité PROV-O complète." data-en="Agent A13-Audit: continuous compliance scoring for all 14 PSM elements. Evidence pack generated in <2h. Full PROV-O traceability.">Agent A13-Audit : scoring conformité continu pour chacun des 14 éléments PSM. Pack évidence généré en <2h. Traçabilité PROV-O complète.</p>
+  </div>
+
+  <div class="sec"><div class="mx">
+    <h2 data-fr="Scoring Conformité — 14 Éléments OSHA PSM" data-en="Compliance Scoring — 14 OSHA PSM Elements">Scoring Conformité — 14 Éléments OSHA PSM</h2>
+    <p class="sub" data-fr="Chaque élément est évalué en continu par l'agent A13-Audit. Cliquez sur un élément pour détailler les gaps et recommandations." data-en="Each element is continuously assessed by agent A13-Audit. Click an element to see gaps and recommendations.">Chaque élément est évalué en continu par l'agent A13-Audit. Cliquez sur un élément pour détailler les gaps et recommandations.</p>
+
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap">
+      <div style="font-size:0.82rem;color:var(--t2)" data-fr="Score global :" data-en="Overall score:">Score global :</div>
+      <div id="globalScore" style="font-size:2rem;font-weight:900;font-family:var(--mono)"></div>
+      <button class="play-btn" onclick="randomizeAudit()" data-fr="🔄 Simuler audit" data-en="🔄 Simulate audit">🔄 Simuler audit</button>
+    </div>
+
+    <div class="chw">
+      <div class="cht" data-fr="RADAR 14 ÉLÉMENTS PSM" data-en="14 PSM ELEMENTS RADAR">RADAR 14 ÉLÉMENTS PSM</div>
+      <canvas id="auditRadar" height="340"></canvas>
+    </div>
+
+    <div class="audit-grid" id="auditGrid"></div>
+
+    <div class="stats">
+      <div class="st"><div class="st-v cg"><2h</div><div class="st-l" data-fr="Pack évidence" data-en="Evidence Pack">Pack évidence</div></div>
+      <div class="st"><div class="st-v c1">PROV-O</div><div class="st-l" data-fr="Traçabilité" data-en="Traceability">Traçabilité</div></div>
+      <div class="st"><div class="st-v c2">3 ans</div><div class="st-l" data-fr="Cycle audit" data-en="Audit Cycle">Cycle audit</div></div>
+      <div class="st"><div class="st-v cr">-99%</div><div class="st-l" data-fr="Temps préparation" data-en="Prep Time">Temps préparation</div></div>
+    </div>
+
+    <!-- AI AUDIT -->
+    <div class="ai-panel" style="margin-top:1.5rem">
+      <div class="ai-badge"><span class="dot"></span> CLAUDE API — A13-Audit</div>
+      <h2 style="font-size:1.2rem;margin-bottom:0.5rem" data-fr="📊 Pack Évidence IA" data-en="📊 AI Evidence Pack">📊 Pack Évidence IA</h2>
+      <p style="font-size:.85rem;color:var(--t2);margin-bottom:1rem" data-fr="Décrivez votre installation et son contexte. L'IA génère un rapport d'audit des 14 éléments PSM avec scoring et recommandations prioritaires." data-en="Describe your facility and context. AI generates a 14-element PSM audit report with scoring and priority recommendations.">Décrivez votre installation et son contexte. L'IA génère un rapport d'audit des 14 éléments PSM avec scoring et recommandations prioritaires.</p>
+      <textarea class="ai-scenario-input" id="auditInput" placeholder="Ex: Raffinerie 50,000 bpd, 340 employés, dernière PHA il y a 4 ans, MOC papier, 3 SIF non testées depuis 18 mois, 2 incidents Tier 2 en 2025. Budget MI réduit de 20%."></textarea>
+      <button class="ai-btn" id="auditAiBtn" onclick="generateAIAudit()">📋 Générer Audit IA</button>
+      <div id="auditAiResult" class="ai-content" style="margin-top:1rem"></div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ═══════════ D5 — AGENTS ═══════════ -->
+<div id="d5" class="dim">
+  <div class="dhero h5">
+    <div class="dbadge b5">🤖 <span data-fr="DIMENSION 5 — PIPELINE AGENTIQUE" data-en="DIMENSION 5 — AGENTIC PIPELINE">DIMENSION 5 — PIPELINE AGENTIQUE</span></div>
+    <h1><span class="hl">14 Agents</span> PSM-X5</h1>
+    <p data-fr="Architecture WAVE 4 — 5 niveaux orchestrés par EDGY-AgenticX5. Chaque agent couvre un élément OSHA PSM. Temps pipeline total <2 secondes." data-en="WAVE 4 Architecture — 5 levels orchestrated by EDGY-AgenticX5. Each agent covers one OSHA PSM element. Total pipeline time <2 seconds.">Architecture WAVE 4 — 5 niveaux orchestrés par EDGY-AgenticX5. Chaque agent couvre un élément OSHA PSM. Temps pipeline total <2 secondes.</p>
+  </div>
+
+  <div class="sec"><div class="mx">
+    <h2 data-fr="Pipeline 14 Agents" data-en="14-Agent Pipeline">Pipeline 14 Agents</h2>
+    <p class="sub" data-fr="Visualisation de l'orchestration temps réel des 14 agents spécialisés PSM-X5." data-en="Real-time visualization of the 14 specialized PSM-X5 agents orchestration.">Visualisation de l'orchestration temps réel des 14 agents spécialisés PSM-X5.</p>
+
+    <div class="pipe" id="agentPipe"></div>
+
+    <!-- Agent Details -->
+    <h2 style="margin-top:2rem" data-fr="Détail des Agents" data-en="Agent Details">Détail des Agents</h2>
+    <div class="g g3" id="agentCards" style="margin-top:1rem"></div>
+
+    <!-- Ecosystem Links -->
+    <h2 style="margin-top:2.5rem" data-fr="Interconnexions Écosystème AgenticX5" data-en="AgenticX5 Ecosystem Interconnections">Interconnexions Écosystème AgenticX5</h2>
+    <p class="sub" data-fr="PSM-X5 est la plateforme #26, interconnectée nativement avec l'ensemble de l'écosystème." data-en="PSM-X5 is platform #26, natively interconnected with the entire ecosystem.">PSM-X5 est la plateforme #26, interconnectée nativement avec l'ensemble de l'écosystème.</p>
+    <div class="g g4" id="ecoLinks" style="margin-top:1rem"></div>
+
+    <!-- AI RCA Investigation -->
+    <div class="ai-panel" style="margin-top:2rem">
+      <div class="ai-badge"><span class="dot"></span> CLAUDE API — A11-RCA</div>
+      <h2 style="font-size:1.2rem;margin-bottom:0.5rem" data-fr="🔍 Investigation Incident IA" data-en="🔍 AI Incident Investigation">🔍 Investigation Incident IA</h2>
+      <p style="font-size:.85rem;color:var(--t2);margin-bottom:1rem" data-fr="Décrivez un incident ou near-miss process safety. L'IA conduit un 5-Why structuré, identifie les barrières défaillantes et génère le Bow-Tie post-incident." data-en="Describe a process safety incident or near-miss. AI conducts a structured 5-Why, identifies failed barriers and generates the post-incident Bow-Tie.">Décrivez un incident ou near-miss process safety. L'IA conduit un 5-Why structuré, identifie les barrières défaillantes et génère le Bow-Tie post-incident.</p>
+      <textarea class="ai-scenario-input" id="rcaInput" placeholder="Ex: Relâchement de propylène depuis PSV-301 pendant startup après maintenance turnaround. PSV a ouvert à 95% du set pressure. Opérateur n'a pas vu l'alarme haute pression (alarm flood de 47 alarmes/10min pendant startup). Pas de blessé, nuage dispersé en 12 minutes."></textarea>
+      <button class="ai-btn" id="rcaAiBtn" onclick="generateAIRCA()">🔍 Investiguer IA</button>
+      <div id="rcaAiResult" class="ai-content" style="margin-top:1rem"></div>
+    </div>
+
+    <div class="cta" style="margin-top:2.5rem">
+      <h3 data-fr="Prêt pour la production" data-en="Production Ready">Prêt pour la production</h3>
+      <p data-fr="PSM-X5 est déployable en mode MVP (4 agents core) ou complet (14 agents orchestrés)." data-en="PSM-X5 is deployable in MVP mode (4 core agents) or full (14 orchestrated agents).">PSM-X5 est déployable en mode MVP (4 agents core) ou complet (14 agents orchestrés).</p>
+      <a class="cta-b" href="mailto:team@agenticx5.com" data-fr="Contacter l'équipe" data-en="Contact the team">Contacter l'équipe</a>
+    </div>
+  </div></div>
+</div>
+
+<script>
+/* ═══ DATA ═══ */
+let LN='fr';
+const PSM_ELEMENTS=[
+  {n:1,icon:'👥',name:{fr:'Employee Participation',en:'Employee Participation'},agent:'A1-Participation',desc:{fr:'Engagement employés, sondages NLP, feedback continu, gamification sécurité',en:'Employee engagement, NLP surveys, continuous feedback, safety gamification'},color:'var(--cyan)'},
+  {n:2,icon:'📄',name:{fr:'Process Safety Information',en:'Process Safety Information'},agent:'A2-PSI-RAG',desc:{fr:'RAG sur doc PSI, P&ID indexés, MSDS, recherche sémantique langage naturel',en:'RAG on PSI docs, indexed P&IDs, MSDS, natural language semantic search'},color:'var(--blue)'},
+  {n:3,icon:'🔬',name:{fr:'Process Hazard Analysis',en:'Process Hazard Analysis'},agent:'A3-PHA-Engine',desc:{fr:'HAZOP/HAZID IA, LOPA semi-quantitatif, Bow-Tie automatisé <5min',en:'AI HAZOP/HAZID, semi-quantitative LOPA, automated Bow-Tie <5min'},color:'var(--d1)'},
+  {n:4,icon:'📋',name:{fr:'Operating Procedures',en:'Operating Procedures'},agent:'A4-OpsProc',desc:{fr:'Génération/MAJ procédures IA, conformité auto, alertes obsolescence',en:'AI procedure generation/update, auto compliance, obsolescence alerts'},color:'var(--amber)'},
+  {n:5,icon:'🎓',name:{fr:'Training',en:'Training'},agent:'A5-Training',desc:{fr:'Parcours adaptatifs LiteraCIA, VR scénarios, certification tracking, refresher 3 ans',en:'LiteraCIA adaptive paths, VR scenarios, cert tracking, 3-year refresher'},color:'var(--emerald)'},
+  {n:6,icon:'🏗️',name:{fr:'Contractors',en:'Contractors'},agent:'A6-Contractor',desc:{fr:'Onboarding digital, vérification qualifications HHC, orientation site',en:'Digital onboarding, HHC qualification verification, site orientation'},color:'var(--orange)'},
+  {n:7,icon:'✅',name:{fr:'Pre-Startup Safety Review',en:'Pre-Startup Safety Review'},agent:'A7-PSSR',desc:{fr:'Workflow PSSR digital, checklists dynamiques par type changement',en:'Digital PSSR workflow, dynamic checklists per change type'},color:'var(--d2)'},
+  {n:8,icon:'⚙️',name:{fr:'Mechanical Integrity',en:'Mechanical Integrity'},agent:'A8-MechInt',desc:{fr:'Prédictif IoT, SIS/SIF/SIL, RAGAGEP compliance, inspection CV',en:'Predictive IoT, SIS/SIF/SIL, RAGAGEP compliance, CV inspection'},color:'var(--purple)'},
+  {n:9,icon:'🔥',name:{fr:'Hot Work Permits',en:'Hot Work Permits'},agent:'A9-HotWork',desc:{fr:'Permis digitaux géolocalisés, détection ATEX auto, monitoring atmosphère',en:'Geolocated digital permits, auto ATEX detection, atmosphere monitoring'},color:'var(--rose)'},
+  {n:10,icon:'🔄',name:{fr:'Management of Change',en:'Management of Change'},agent:'A10-MOC',desc:{fr:'Workflow complet, évaluation impact auto, notifications cascade, MAJ PSI',en:'Complete workflow, auto impact assessment, cascade notifications, PSI update'},color:'var(--d2)'},
+  {n:11,icon:'🔍',name:{fr:'Incident Investigation',en:'Incident Investigation'},agent:'A11-RCA',desc:{fr:'Root Cause Analysis IA, 5-Why auto, Bow-Tie post-incident, Neo4j corrélation',en:'AI Root Cause Analysis, auto 5-Why, post-incident Bow-Tie, Neo4j correlation'},color:'var(--accent)'},
+  {n:12,icon:'🚨',name:{fr:'Emergency Planning',en:'Emergency Planning'},agent:'A12-Emergency',desc:{fr:'Plans dynamiques, simulation relâchement, coordination PMU, drills auto',en:'Dynamic plans, release simulation, PMU coordination, auto drills'},color:'var(--rose)'},
+  {n:13,icon:'📊',name:{fr:'Compliance Audits',en:'Compliance Audits'},agent:'A13-Audit',desc:{fr:'Pack évidence 14 éléments <2h, gap analysis, scoring continu PROV-O',en:'14-element evidence pack <2h, gap analysis, continuous PROV-O scoring'},color:'var(--d4)'},
+  {n:14,icon:'🔒',name:{fr:'Trade Secrets',en:'Trade Secrets'},agent:'A14-InfoSec',desc:{fr:'Classification documents, RBAC granulaire, traçabilité accès PSI',en:'Document classification, granular RBAC, PSI access traceability'},color:'var(--blue)'}
+];
+
+const HAZOP_NODES=[
+  {id:'reactor',name:{fr:'Réacteur catalytique',en:'Catalytic Reactor'},params:['Temperature','Pressure','Flow','Level','Composition'],
+   deviations:[
+     {dev:'High Temperature',cause:{fr:'Défaillance refroidissement, réaction emballement',en:'Cooling failure, runaway reaction'},consequence:{fr:'Rupture enveloppe, relâchement toxique, explosion',en:'Vessel rupture, toxic release, explosion'},safeguard:{fr:'SIF-001 (SIL 2), soupape PSV-101',en:'SIF-001 (SIL 2), PSV-101 relief valve'},rpl:'H'},
+     {dev:'High Pressure',cause:{fr:'Blocage sortie, accumulation gaz',en:'Outlet blockage, gas accumulation'},consequence:{fr:'Rupture catastrophique, projectiles',en:'Catastrophic rupture, projectiles'},safeguard:{fr:'PSV-102, SIF-002 (SIL 3)',en:'PSV-102, SIF-002 (SIL 3)'},rpl:'H'},
+     {dev:'Low Flow',cause:{fr:'Pompe défaillante, vanne bloquée',en:'Pump failure, stuck valve'},consequence:{fr:'Surchauffe, dommage catalyseur',en:'Overheating, catalyst damage'},safeguard:{fr:'FIC-101 alarme basse, bypass',en:'FIC-101 low alarm, bypass'},rpl:'M'},
+     {dev:'No Flow',cause:{fr:'Arrêt pompe total, rupture ligne',en:'Total pump stop, line rupture'},consequence:{fr:'Thermal runaway, explosion',en:'Thermal runaway, explosion'},safeguard:{fr:'SIF-003 arrêt urgence',en:'SIF-003 emergency shutdown'},rpl:'H'},
+     {dev:'Reverse Flow',cause:{fr:'Défaillance clapet anti-retour',en:'Check valve failure'},consequence:{fr:'Contamination upstream, réaction indésirable',en:'Upstream contamination, unwanted reaction'},safeguard:{fr:'CV-101 clapet, alarme process',en:'CV-101 check valve, process alarm'},rpl:'M'}
+   ]},
+  {id:'column',name:{fr:'Colonne de distillation',en:'Distillation Column'},params:['Temperature','Pressure','Level','Reflux Ratio'],
+   deviations:[
+     {dev:'High Level',cause:{fr:'Excès alimentation, drain bouché',en:'Excess feed, blocked drain'},consequence:{fr:'Débordement, perte confinement',en:'Overflow, loss of containment'},safeguard:{fr:'LIC-201 + SIF-201 (SIL 2)',en:'LIC-201 + SIF-201 (SIL 2)'},rpl:'M'},
+     {dev:'Low Pressure',cause:{fr:'Fuite, défaillance condenseur',en:'Leak, condenser failure'},consequence:{fr:'Implosion, air ingress, explosion',en:'Implosion, air ingress, explosion'},safeguard:{fr:'PIC-202, vacuum breaker',en:'PIC-202, vacuum breaker'},rpl:'H'},
+     {dev:'High Temperature',cause:{fr:'Perte reflux, excès vapeur',en:'Reflux loss, excess steam'},consequence:{fr:'Dégradation produit, surpression',en:'Product degradation, overpressure'},safeguard:{fr:'TIC-203, interlock vapeur',en:'TIC-203, steam interlock'},rpl:'M'}
+   ]},
+  {id:'storage',name:{fr:'Réservoir stockage HHC',en:'HHC Storage Tank'},params:['Level','Temperature','Pressure','Atmosphere'],
+   deviations:[
+     {dev:'High Level',cause:{fr:'Sur-remplissage, vanne défaillante',en:'Overfill, valve failure'},consequence:{fr:'Débordement HHC, contamination',en:'HHC overflow, contamination'},safeguard:{fr:'LSHH-301 + SIF-301 (SIL 2)',en:'LSHH-301 + SIF-301 (SIL 2)'},rpl:'H'},
+     {dev:'Loss of Containment',cause:{fr:'Corrosion, impact mécanique, joint défaillant',en:'Corrosion, mechanical impact, seal failure'},consequence:{fr:'Relâchement toxique/inflammable',en:'Toxic/flammable release'},safeguard:{fr:'Bund wall, détecteurs gaz, ESD',en:'Bund wall, gas detectors, ESD'},rpl:'H'},
+     {dev:'Wrong Composition',cause:{fr:'Contamination cross, erreur produit',en:'Cross-contamination, product error'},consequence:{fr:'Réaction indésirable exothermique',en:'Unwanted exothermic reaction'},safeguard:{fr:'Analyse qualité, procédure chargement',en:'Quality analysis, loading procedure'},rpl:'M'}
+   ]}
+];
+
+const MOC_STEPS=[
+  {time:'T+0s',agent:'A10-MOC',title:{fr:'Soumission changement',en:'Change submission'},desc:{fr:'Remplacement catalyseur Pt-Re/Al₂O₃ par nouvelle formulation. Évaluation impact déclenchée automatiquement.',en:'Pt-Re/Al₂O₃ catalyst replacement with new formulation. Impact assessment triggered automatically.'},tags:[{t:'Chimique',c:'var(--rose)'},{t:'Process',c:'var(--cyan)'}]},
+  {time:'T+12s',agent:'A2-PSI-RAG',title:{fr:'Vérification PSI',en:'PSI verification'},desc:{fr:'Indexation MSDS nouvelle formulation, vérification compatibilité matériaux, mise à jour base PSI.',en:'New formulation MSDS indexing, material compatibility check, PSI database update.'},tags:[{t:'RAG',c:'var(--blue)'},{t:'MSDS',c:'var(--amber)'}]},
+  {time:'T+28s',agent:'A3-PHA-Engine',title:{fr:'Impact PHA évalué',en:'PHA impact assessed'},desc:{fr:'HAZOP delta automatique : 3 nouvelles déviations identifiées, 1 SIF mise à jour requise.',en:'Automatic delta HAZOP: 3 new deviations identified, 1 SIF update required.'},tags:[{t:'HAZOP',c:'var(--d1)'},{t:'SIF',c:'var(--purple)'}]},
+  {time:'T+45s',agent:'A4-OpsProc',title:{fr:'Procédures mises à jour',en:'Procedures updated'},desc:{fr:'SOP-CR-204 rev.7 générée avec nouvelles températures d\'activation et limites opératoires.',en:'SOP-CR-204 rev.7 generated with new activation temperatures and operating limits.'},tags:[{t:'SOP',c:'var(--emerald)'},{t:'Rev.7',c:'var(--amber)'}]},
+  {time:'T+58s',agent:'A5-Training',title:{fr:'Formation assignée',en:'Training assigned'},desc:{fr:'Module LiteraCIA auto-généré pour 12 opérateurs concernés. Deadline: 48h avant startup.',en:'LiteraCIA module auto-generated for 12 affected operators. Deadline: 48h before startup.'},tags:[{t:'LiteraCIA',c:'var(--d4)'},{t:'12 ops',c:'var(--cyan)'}]},
+  {time:'T+72s',agent:'A8-MechInt',title:{fr:'Intégrité vérifiée',en:'Integrity verified'},desc:{fr:'SIF-001 revalidée SIL 2 OK. Matériaux compatibles confirmés. Inspection visuelle assignée.',en:'SIF-001 revalidated SIL 2 OK. Compatible materials confirmed. Visual inspection assigned.'},tags:[{t:'SIL 2',c:'var(--purple)'},{t:'RAGAGEP',c:'var(--orange)'}]},
+  {time:'T+85s',agent:'A7-PSSR',title:{fr:'PSSR générée',en:'PSSR generated'},desc:{fr:'Checklist 32 items générée dynamiquement. 4 approbateurs assignés. Interlock vérifié.',en:'32-item checklist dynamically generated. 4 approvers assigned. Interlock verified.'},tags:[{t:'32 items',c:'var(--d2)'},{t:'4 approv.',c:'var(--d4)'}]},
+  {time:'T+92s',agent:'A13-Audit',title:{fr:'Pack évidence archivé',en:'Evidence pack archived'},desc:{fr:'Traçabilité PROV-O complète. Documents liés : MSDS, HAZOP delta, SOP rev.7, formation, PSSR.',en:'Complete PROV-O traceability. Linked documents: MSDS, delta HAZOP, SOP rev.7, training, PSSR.'},tags:[{t:'PROV-O',c:'var(--d4)'},{t:'Audit-ready',c:'var(--accent)'}]}
+];
+
+const SIF_DATA=[
+  {id:'SIF-001',name:{fr:'Arrêt réacteur haute temp.',en:'Reactor high temp shutdown'},sil:2,pfd:0.0045,target:0.01,status:'ok',trend:[0.004,0.0042,0.0043,0.0045,0.0044,0.0046,0.0048,0.0047,0.0045]},
+  {id:'SIF-002',name:{fr:'Dépressurisation urgence',en:'Emergency depressurization'},sil:3,pfd:0.00082,target:0.001,status:'ok',trend:[0.0007,0.00072,0.00075,0.00078,0.0008,0.00082,0.00079,0.00081,0.00082]},
+  {id:'SIF-003',name:{fr:'Arrêt pompe no-flow',en:'No-flow pump shutdown'},sil:2,pfd:0.0089,target:0.01,status:'warn',trend:[0.005,0.006,0.0065,0.007,0.0075,0.008,0.0082,0.0086,0.0089]},
+  {id:'SIF-201',name:{fr:'Contrôle niveau colonne',en:'Column level control'},sil:2,pfd:0.0032,target:0.01,status:'ok',trend:[0.003,0.0031,0.003,0.0032,0.0031,0.0033,0.0032,0.0031,0.0032]},
+  {id:'SIF-301',name:{fr:'Anti-débordement HHC',en:'HHC overflow prevention'},sil:2,pfd:0.011,target:0.01,status:'alert',trend:[0.006,0.007,0.0075,0.008,0.0085,0.009,0.0095,0.0105,0.011]},
+  {id:'SIF-401',name:{fr:'ESD zone ATEX',en:'ATEX zone ESD'},sil:3,pfd:0.00065,target:0.001,status:'ok',trend:[0.0006,0.00062,0.00063,0.00065,0.00064,0.00063,0.00065,0.00064,0.00065]}
+];
+
+const ECO_LINKS=[
+  {name:'EDGY-AgenticX5',role:{fr:'Orchestrateur central',en:'Central orchestrator'},icon:'🧠',c:'var(--accent)'},
+  {name:'SafetyGraph',role:{fr:'Neo4j 22M+ incidents',en:'Neo4j 22M+ incidents'},icon:'🕸️',c:'var(--cyan)'},
+  {name:'SENTINEL·X5',role:{fr:'Alarm Intelligence',en:'Alarm Intelligence'},icon:'🚨',c:'var(--rose)'},
+  {name:'SafeScan360',role:{fr:'Computer Vision',en:'Computer Vision'},icon:'📷',c:'var(--blue)'},
+  {name:'SafeTwinX5',role:{fr:'Jumeaux numériques',en:'Digital Twins'},icon:'🏗️',c:'var(--purple)'},
+  {name:'DensityGuard',role:{fr:'Mining Process',en:'Mining Process'},icon:'⛏️',c:'var(--amber)'},
+  {name:'BehaviorX',role:{fr:'Analyse comportementale',en:'Behavioral Analysis'},icon:'🧠',c:'var(--d1)'},
+  {name:'LiteraCIA',role:{fr:'Formation adaptative',en:'Adaptive Training'},icon:'🎓',c:'var(--emerald)'},
+  {name:'HolisticErgo',role:{fr:'Ergonomie postes',en:'Workstation Ergonomics'},icon:'🧘',c:'var(--orange)'},
+  {name:'SafeVision SST',role:{fr:'Vidéos formation IA',en:'AI Training Videos'},icon:'🎬',c:'var(--d2)'},
+  {name:'Hovermap Safety',role:{fr:'LiDAR Drones ATEX',en:'ATEX LiDAR Drones'},icon:'🚁',c:'var(--d3)'},
+  {name:'Standards-Gouv.',role:{fr:'Règles opérationnelles',en:'Operational Rules'},icon:'📜',c:'var(--d4)'}
+];
+
+/* ═══ NAVIGATION ═══ */
+function go(dim){
+  document.querySelectorAll('.hub,.dim').forEach(d=>d.classList.remove('on'));
+  document.getElementById(dim).classList.add('on');
+  document.querySelectorAll('.nav-tab').forEach(t=>{t.classList.toggle('active',t.dataset.d===dim);});
+  window.scrollTo(0,0);
+  if(dim==='d1')renderHAZOP();
+  if(dim==='d2')renderMOC();
+  if(dim==='d3')renderSIS();
+  if(dim==='d4')renderAudit();
+  if(dim==='d5')renderAgents();
+}
+
+function setLang(l){LN=l;document.querySelectorAll('.lang').forEach(b=>b.classList.toggle('on',b.textContent===l.toUpperCase()));
+document.querySelectorAll('[data-'+l+']').forEach(el=>{
+  const t=el.getAttribute('data-'+l);if(t)el.textContent=t;
+});renderCurrentDim();}
+
+function renderCurrentDim(){
+  const active=document.querySelector('.hub.on,.dim.on');
+  if(!active)return;const id=active.id;
+  if(id==='d1')renderHAZOP();if(id==='d2')renderMOC();if(id==='d3')renderSIS();if(id==='d4')renderAudit();if(id==='d5')renderAgents();
+}
+
+/* ═══ HUB RENDERING ═══ */
+function renderHub(){
+  const grid=document.getElementById('hubGrid');
+  let h='';
+  PSM_ELEMENTS.forEach((e,i)=>{
+    const colors=['linear-gradient(90deg,var(--d1),var(--cyan))','linear-gradient(90deg,var(--blue),var(--cyan))','linear-gradient(90deg,var(--d1),var(--blue))','linear-gradient(90deg,var(--amber),var(--orange))','linear-gradient(90deg,var(--emerald),var(--cyan))','linear-gradient(90deg,var(--orange),var(--amber))','linear-gradient(90deg,var(--d2),var(--orange))','linear-gradient(90deg,var(--purple),var(--accent))','linear-gradient(90deg,var(--rose),var(--orange))','linear-gradient(90deg,var(--d2),var(--amber))','linear-gradient(90deg,var(--accent),var(--rose))','linear-gradient(90deg,var(--rose),var(--accent))','linear-gradient(90deg,var(--d4),var(--cyan))','linear-gradient(90deg,var(--blue),var(--purple))'];
+    const dim=i<1?'d5':i<3?'d1':i<7?'d2':i<9?'d3':i<13?'d4':'d5';
+    h+=`<div class="hub-card" onclick="go('${dim}')" style="--top-c:${colors[i]}"><div style="position:absolute;top:0;left:0;right:0;height:3px;background:${colors[i]}"></div><div class="hc-top"><span class="hc-icon">${e.icon}</span><span class="hc-num">#${e.n}</span></div><h3>${e.name[LN]}</h3><p>${e.desc[LN]}</p><div class="hc-agent">${e.agent}</div></div>`;
+  });
+  grid.innerHTML=h;
+  // Count-up
+  animCount('cnt14',14,1200);animCount('cnt14a',14,1400);
+}
+
+function animCount(id,target,dur){
+  const el=document.getElementById(id);if(!el)return;
+  let s=performance.now();
+  function step(t){const p=Math.min((t-s)/dur,1);el.textContent=Math.floor(p*target);if(p<1)requestAnimationFrame(step);}
+  requestAnimationFrame(step);
+}
+
+/* ═══ D1: HAZOP ═══ */
+let hazopNode=0;
+function renderHAZOP(){
+  let tabs='';HAZOP_NODES.forEach((n,i)=>{tabs+=`<div class="tab ${hazopNode===i?'on':''}" onclick="hazopNode=${i};renderHAZOP()">${n.name[LN]}</div>`;});
+  document.getElementById('hazopNodeTabs').innerHTML=tabs;
+  const node=HAZOP_NODES[hazopNode];
+  let h=`<div class="hazop-row header"><div class="hazop-cell">RPL</div><div class="hazop-cell">Deviation</div><div class="hazop-cell">${LN==='fr'?'Cause':'Cause'}</div><div class="hazop-cell">${LN==='fr'?'Conséquence':'Consequence'}</div><div class="hazop-cell">${LN==='fr'?'Protection':'Safeguard'}</div><div class="hazop-cell">Risk</div></div>`;
+  node.deviations.forEach(d=>{
+    const rc=d.rpl==='H'?'rpl-h':d.rpl==='M'?'rpl-m':'rpl-l';
+    h+=`<div class="hazop-row"><div class="hazop-cell"><span class="rpl ${rc}">${d.rpl}</span></div><div class="hazop-cell" style="font-weight:600;color:var(--t1)">${d.dev}</div><div class="hazop-cell" style="color:var(--t2)">${d.cause[LN]}</div><div class="hazop-cell" style="color:var(--t2)">${d.consequence[LN]}</div><div class="hazop-cell" style="color:var(--d4)">${d.safeguard[LN]}</div><div class="hazop-cell"><span class="bd ${d.rpl==='H'?'bd-r':'bd-y'}">${d.rpl==='H'?(LN==='fr'?'Élevé':'High'):(LN==='fr'?'Moyen':'Medium')}</span></div></div>`;
+  });
+  document.getElementById('hazopContent').innerHTML=h;
+  renderBowTie();
+}
+
+function renderBowTie(){
+  const svg=document.getElementById('bowtieSvg');
+  const ns='http://www.w3.org/2000/svg';svg.innerHTML='';
+  const node=HAZOP_NODES[hazopNode];
+  // Background
+  const bg=document.createElementNS(ns,'rect');bg.setAttribute('width','900');bg.setAttribute('height','320');bg.setAttribute('fill','#070910');svg.appendChild(bg);
+  // Center event
+  const cx=450,cy=160;
+  const ce=document.createElementNS(ns,'rect');ce.setAttribute('x',cx-60);ce.setAttribute('y',cy-25);ce.setAttribute('width','120');ce.setAttribute('height','50');ce.setAttribute('rx','8');ce.setAttribute('fill','#e94560');ce.setAttribute('opacity','0.9');svg.appendChild(ce);
+  const ct=document.createElementNS(ns,'text');ct.setAttribute('x',cx);ct.setAttribute('y',cy+5);ct.setAttribute('text-anchor','middle');ct.setAttribute('fill','#fff');ct.setAttribute('font-size','11');ct.setAttribute('font-weight','700');ct.setAttribute('font-family','Outfit');ct.textContent=LN==='fr'?'ÉVÉNEMENT':'TOP EVENT';svg.appendChild(ct);
+  // Left side: Threats
+  const threats=node.deviations.slice(0,4);
+  threats.forEach((d,i)=>{
+    const ty=50+i*70,tx=30;
+    // Threat box
+    const tr=document.createElementNS(ns,'rect');tr.setAttribute('x',tx);tr.setAttribute('y',ty);tr.setAttribute('width','140');tr.setAttribute('height','40');tr.setAttribute('rx','6');tr.setAttribute('fill','rgba(245,158,11,0.15)');tr.setAttribute('stroke','#f59e0b');tr.setAttribute('stroke-width','1');svg.appendChild(tr);
+    const tt=document.createElementNS(ns,'text');tt.setAttribute('x',tx+70);tt.setAttribute('y',ty+24);tt.setAttribute('text-anchor','middle');tt.setAttribute('fill','#fbbf24');tt.setAttribute('font-size','9');tt.setAttribute('font-family','Outfit');tt.textContent=d.dev.substring(0,20);svg.appendChild(tt);
+    // Line to center
+    const ln=document.createElementNS(ns,'line');ln.setAttribute('x1',tx+140);ln.setAttribute('y1',ty+20);ln.setAttribute('x2',cx-60);ln.setAttribute('y2',cy);ln.setAttribute('stroke','rgba(245,158,11,0.3)');ln.setAttribute('stroke-width','1.5');svg.appendChild(ln);
+    // Prevention barrier
+    const bx=230+i*15;
+    const br=document.createElementNS(ns,'rect');br.setAttribute('x',bx);br.setAttribute('y',ty);br.setAttribute('width','8');br.setAttribute('height','40');br.setAttribute('rx','3');br.setAttribute('fill','rgba(16,185,129,0.6)');svg.appendChild(br);
+    const bl=document.createElementNS(ns,'text');bl.setAttribute('x',bx+4);bl.setAttribute('y',ty-5);bl.setAttribute('text-anchor','middle');bl.setAttribute('fill','#2dd4bf');bl.setAttribute('font-size','7');bl.setAttribute('font-family','JetBrains Mono');bl.textContent='IPL';svg.appendChild(bl);
+  });
+  // Right side: Consequences
+  const consColors=['#fb7185','#f97316','#fbbf24'];
+  const consequences=[LN==='fr'?'Relâchement toxique':'Toxic release',LN==='fr'?'Explosion/Incendie':'Explosion/Fire',LN==='fr'?'Dommage équipement':'Equipment damage'];
+  consequences.forEach((c,i)=>{
+    const ty=70+i*80,tx=730;
+    const cr=document.createElementNS(ns,'rect');cr.setAttribute('x',tx);cr.setAttribute('y',ty);cr.setAttribute('width','140');cr.setAttribute('height','40');cr.setAttribute('rx','6');cr.setAttribute('fill',`rgba(${i===0?'251,113,133':i===1?'249,115,22':'251,191,36'},0.15)`);cr.setAttribute('stroke',consColors[i]);cr.setAttribute('stroke-width','1');svg.appendChild(cr);
+    const ct2=document.createElementNS(ns,'text');ct2.setAttribute('x',tx+70);ct2.setAttribute('y',ty+24);ct2.setAttribute('text-anchor','middle');ct2.setAttribute('fill',consColors[i]);ct2.setAttribute('font-size','9');ct2.setAttribute('font-family','Outfit');ct2.textContent=c;svg.appendChild(ct2);
+    const ln=document.createElementNS(ns,'line');ln.setAttribute('x1',cx+60);ln.setAttribute('y1',cy);ln.setAttribute('x2',tx);ln.setAttribute('y2',ty+20);ln.setAttribute('stroke',`rgba(${i===0?'251,113,133':i===1?'249,115,22':'251,191,36'},0.3)`);ln.setAttribute('stroke-width','1.5');svg.appendChild(ln);
+    // Mitigation barrier
+    const bx=640-i*15;
+    const br=document.createElementNS(ns,'rect');br.setAttribute('x',bx);br.setAttribute('y',ty);br.setAttribute('width','8');br.setAttribute('height','40');br.setAttribute('rx','3');br.setAttribute('fill','rgba(59,130,246,0.6)');svg.appendChild(br);
+    const bl=document.createElementNS(ns,'text');bl.setAttribute('x',bx+4);bl.setAttribute('y',ty-5);bl.setAttribute('text-anchor','middle');bl.setAttribute('fill','#60a5fa');bl.setAttribute('font-size','7');bl.setAttribute('font-family','JetBrains Mono');bl.textContent='MIT';svg.appendChild(bl);
+  });
+  // Labels
+  const labels=[{x:100,y:310,t:LN==='fr'?'← MENACES':'← THREATS',c:'#fbbf24'},{x:450,y:310,t:'⬛ '+node.name[LN],c:'#e94560'},{x:800,y:310,t:LN==='fr'?'CONSÉQUENCES →':'CONSEQUENCES →',c:'#fb7185'}];
+  labels.forEach(l=>{const lt=document.createElementNS(ns,'text');lt.setAttribute('x',l.x);lt.setAttribute('y',l.y);lt.setAttribute('text-anchor','middle');lt.setAttribute('fill',l.c);lt.setAttribute('font-size','10');lt.setAttribute('font-weight','600');lt.setAttribute('font-family','Outfit');lt.textContent=l.t;svg.appendChild(lt);});
+  // Legend
+  [{x:200,c:'#10b981',t:LN==='fr'?'■ Barrières prévention':'■ Prevention barriers'},{x:620,c:'#3b82f6',t:LN==='fr'?'■ Barrières mitigation':'■ Mitigation barriers'}].forEach(l=>{const lt=document.createElementNS(ns,'text');lt.setAttribute('x',l.x);lt.setAttribute('y',20);lt.setAttribute('text-anchor','middle');lt.setAttribute('fill',l.c);lt.setAttribute('font-size','9');lt.setAttribute('font-family','Outfit');lt.textContent=l.t;svg.appendChild(lt);});
+}
+
+/* ═══ D2: MOC ═══ */
+let mocTimer=null,mocStep=-1;
+function renderMOC(){
+  let h='';MOC_STEPS.forEach((s,i)=>{
+    const cls=i<mocStep?'done':i===mocStep?'active':'pending';
+    h+=`<div class="moc-step ${cls}"><div class="moc-dot"></div><div class="moc-time">${s.time}</div><div class="moc-agent" style="color:${PSM_ELEMENTS.find(e=>s.agent.includes(e.agent.split('-')[1]))?.color||'var(--accent)'}">${s.agent} — ${s.title[LN]}</div><div class="moc-desc">${s.desc[LN]}</div><div class="moc-tags">${s.tags.map(t=>`<span class="moc-tag" style="background:${t.c}22;color:${t.c}">${t.t}</span>`).join('')}</div></div>`;
+  });
+  document.getElementById('mocFlow').innerHTML=h;
+  renderPSSR();
+}
+
+function startMOC(){
+  if(mocTimer)clearInterval(mocTimer);
+  mocStep=-1;let elapsed=0;
+  document.getElementById('mocPlayBtn').textContent='⏸ En cours...';
+  document.getElementById('mocStatus').textContent=LN==='fr'?'En cours':'In progress';
+  document.getElementById('mocStatus').className='bd bd-y';
+  mocTimer=setInterval(()=>{
+    elapsed++;
+    const m=Math.floor(elapsed/60),s=elapsed%60;
+    document.getElementById('mocClock').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+    if(elapsed%4===0&&mocStep<MOC_STEPS.length-1){
+      mocStep++;renderMOC();
+    }
+    if(mocStep>=MOC_STEPS.length-1){
+      clearInterval(mocTimer);mocTimer=null;
+      document.getElementById('mocPlayBtn').textContent='▶ Relancer';
+      document.getElementById('mocStatus').textContent=LN==='fr'?'Complété':'Completed';
+      document.getElementById('mocStatus').className='bd bd-g';
+    }
+  },1000);
+}
+
+function renderPSSR(){
+  const items=[
+    {cat:{fr:'Process Safety Information',en:'Process Safety Information'},checks:[{t:{fr:'MSDS nouvelle formulation vérifiée',en:'New formulation MSDS verified'},done:mocStep>=1},{t:{fr:'P&ID mis à jour avec modifications',en:'P&ID updated with modifications'},done:mocStep>=2}]},
+    {cat:{fr:'Hazard Analysis',en:'Hazard Analysis'},checks:[{t:{fr:'HAZOP delta complété et approuvé',en:'Delta HAZOP completed and approved'},done:mocStep>=2},{t:{fr:'Recommandations PHA implémentées',en:'PHA recommendations implemented'},done:mocStep>=3}]},
+    {cat:{fr:'Operating Procedures',en:'Operating Procedures'},checks:[{t:{fr:'SOP révisée et distribuée',en:'SOP revised and distributed'},done:mocStep>=3},{t:{fr:'Limites opératoires mises à jour',en:'Operating limits updated'},done:mocStep>=3}]},
+    {cat:{fr:'Training',en:'Training'},checks:[{t:{fr:'Personnel formé sur nouvelles procédures',en:'Personnel trained on new procedures'},done:mocStep>=4},{t:{fr:'Compétences vérifiées et documentées',en:'Competencies verified and documented'},done:mocStep>=4}]},
+    {cat:{fr:'Mechanical Integrity',en:'Mechanical Integrity'},checks:[{t:{fr:'SIF revalidée, SIL confirmé',en:'SIF revalidated, SIL confirmed'},done:mocStep>=5},{t:{fr:'Équipement inspecté, RAGAGEP conforme',en:'Equipment inspected, RAGAGEP compliant'},done:mocStep>=5}]},
+    {cat:{fr:'Authorization',en:'Authorization'},checks:[{t:{fr:'Approbation Process Engineer',en:'Process Engineer approval'},done:mocStep>=6},{t:{fr:'Approbation Safety Manager',en:'Safety Manager approval'},done:mocStep>=6},{t:{fr:'Approbation Operations Manager',en:'Operations Manager approval'},done:mocStep>=6}]}
+  ];
+  let h='<div class="g g2" style="margin-top:1rem">';
+  items.forEach(cat=>{
+    h+=`<div class="cd"><h4 style="color:var(--d2)">${cat.cat[LN]}</h4>`;
+    cat.checks.forEach(c=>{
+      h+=`<div style="display:flex;align-items:center;gap:8px;padding:4px 0;font-size:0.82rem"><span style="color:${c.done?'var(--emerald)':'var(--t3)'}">${c.done?'✅':'⬜'}</span><span style="color:${c.done?'var(--t1)':'var(--t3)'}">${c.t[LN]}</span></div>`;
+    });
+    h+='</div>';
+  });
+  h+='</div>';
+  document.getElementById('pssrChecklist').innerHTML=h;
+}
+
+/* ═══ D3: SIS/SIL ═══ */
+let silChart=null;
+function renderSIS(){
+  let h='';SIF_DATA.forEach(s=>{
+    const pct=Math.min(100,(s.pfd/s.target)*100);
+    const fc=s.status==='alert'?'var(--rose)':s.status==='warn'?'var(--amber)':'var(--emerald)';
+    const cls=s.status==='alert'?' alert':'';
+    h+=`<div class="sis-card${cls}"><div style="font-size:0.72rem;font-weight:700;color:${fc}">${s.id}</div><div class="sis-val" style="color:${fc}">${s.pfd.toExponential(2)}</div><div class="sis-lbl">${s.name[LN]}</div><div style="display:flex;justify-content:space-between;font-size:0.68rem;color:var(--t3);margin-top:6px"><span>SIL ${s.sil}</span><span>Target: ${s.target}</span></div><div class="sis-bar"><div class="sis-fill" style="width:${pct}%;background:${fc}"></div></div></div>`;
+  });
+  document.getElementById('sisGrid').innerHTML=h;
+  renderSILChart();
+}
+
+function renderSILChart(){
+  const ctx=document.getElementById('silChart');if(!ctx)return;
+  if(silChart)silChart.destroy();
+  const labels=['J-80','J-70','J-60','J-50','J-40','J-30','J-20','J-10','Auj.'];
+  silChart=new Chart(ctx,{type:'line',data:{labels,datasets:[
+    {label:'SIF-003 (⚠)',data:SIF_DATA[2].trend,borderColor:'#f59e0b',backgroundColor:'rgba(245,158,11,0.1)',fill:true,tension:0.3,pointRadius:3},
+    {label:'SIF-301 (🔴)',data:SIF_DATA[4].trend,borderColor:'#f43f5e',backgroundColor:'rgba(244,63,94,0.1)',fill:true,tension:0.3,pointRadius:3},
+    {label:'SIF-001 (✅)',data:SIF_DATA[0].trend,borderColor:'#10b981',backgroundColor:'rgba(16,185,129,0.05)',fill:false,tension:0.3,pointRadius:2},
+    {label:'SIL 2 Target',data:Array(9).fill(0.01),borderColor:'rgba(255,255,255,0.2)',borderDash:[5,5],pointRadius:0,fill:false}
+  ]},options:{responsive:true,plugins:{legend:{labels:{color:'#94a3b8',font:{family:'Outfit',size:11}}}},scales:{x:{ticks:{color:'#64748b',font:{family:'Outfit'}}},y:{ticks:{color:'#64748b',font:{family:'JetBrains Mono',size:10},callback:v=>v.toExponential(1)},grid:{color:'rgba(255,255,255,0.03)'}}}}});
+}
+
+/* ═══ D4: AUDIT ═══ */
+let auditScores=PSM_ELEMENTS.map(()=>Math.floor(Math.random()*40)+55);
+let auditChart=null;
+function renderAudit(){
+  const avg=Math.round(auditScores.reduce((a,b)=>a+b)/auditScores.length);
+  const ac=avg>=80?'var(--emerald)':avg>=60?'var(--amber)':'var(--rose)';
+  document.getElementById('globalScore').innerHTML=`<span style="color:${ac}">${avg}%</span>`;
+  let h='';PSM_ELEMENTS.forEach((e,i)=>{
+    const s=auditScores[i];const sc=s>=80?'var(--emerald)':s>=60?'var(--amber)':'var(--rose)';
+    h+=`<div class="audit-card"><div class="audit-head"><div><span class="audit-num">#${e.n}</span> <span style="font-size:0.85rem;font-weight:600">${e.name[LN]}</span></div><div class="audit-score" style="color:${sc}">${s}%</div></div><div style="font-size:0.75rem;color:var(--t2)">${e.agent} — ${e.desc[LN].substring(0,60)}...</div><div class="audit-bar"><div class="audit-fill" style="width:${s}%;background:${sc}"></div></div></div>`;
+  });
+  document.getElementById('auditGrid').innerHTML=h;
+  renderAuditRadar();
+}
+
+function randomizeAudit(){auditScores=PSM_ELEMENTS.map(()=>Math.floor(Math.random()*45)+50);renderAudit();}
+
+function renderAuditRadar(){
+  const ctx=document.getElementById('auditRadar');if(!ctx)return;
+  if(auditChart)auditChart.destroy();
+  auditChart=new Chart(ctx,{type:'radar',data:{labels:PSM_ELEMENTS.map(e=>'#'+e.n+' '+e.name[LN].substring(0,12)),datasets:[
+    {label:LN==='fr'?'Score actuel':'Current score',data:auditScores,backgroundColor:'rgba(233,69,96,0.15)',borderColor:'#e94560',pointBackgroundColor:'#e94560',pointRadius:4},
+    {label:LN==='fr'?'Cible':'Target',data:Array(14).fill(85),borderColor:'rgba(16,185,129,0.4)',borderDash:[4,4],pointRadius:0,fill:false}
+  ]},options:{responsive:true,scales:{r:{min:0,max:100,ticks:{display:false,stepSize:25},grid:{color:'rgba(255,255,255,0.04)'},pointLabels:{color:'#94a3b8',font:{family:'Outfit',size:9}}}},plugins:{legend:{labels:{color:'#94a3b8',font:{family:'Outfit',size:11}}}}}});
+}
+
+/* ═══ D5: AGENTS ═══ */
+function renderAgents(){
+  // Pipeline
+  let pipe='';PSM_ELEMENTS.forEach((e,i)=>{
+    const colors=['var(--cyan)','var(--blue)','var(--d1)','var(--amber)','var(--emerald)','var(--orange)','var(--d2)','var(--purple)','var(--rose)','var(--d2)','var(--accent)','var(--rose)','var(--d4)','var(--blue)'];
+    pipe+=`<div class="pn"><div class="pi" style="border-color:${colors[i]};color:${colors[i]}">${e.icon}</div><div class="pl" style="color:${colors[i]}">A${e.n}</div><div class="pt">${e.agent.split('-')[1]}</div></div>`;
+    if(i<PSM_ELEMENTS.length-1)pipe+='<div class="pa"></div>';
+  });
+  document.getElementById('agentPipe').innerHTML=pipe;
+
+  // Agent cards
+  let cards='';PSM_ELEMENTS.forEach(e=>{
+    cards+=`<div class="cd"><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="font-size:1.5rem">${e.icon}</span><div><div style="font-size:0.82rem;font-weight:700">${e.agent}</div><div style="font-size:0.72rem;color:var(--t3)">#${e.n} ${e.name[LN]}</div></div></div><div class="tx">${e.desc[LN]}</div></div>`;
+  });
+  document.getElementById('agentCards').innerHTML=cards;
+
+  // Eco links
+  let eco='';ECO_LINKS.forEach(l=>{
+    eco+=`<div class="cd" style="text-align:center;padding:1rem"><div style="font-size:1.8rem;margin-bottom:4px">${l.icon}</div><div style="font-size:0.82rem;font-weight:700;color:${l.c}">${l.name}</div><div style="font-size:0.72rem;color:var(--t2)">${l.role[LN]}</div></div>`;
+  });
+  document.getElementById('ecoLinks').innerHTML=eco;
+}
+
+/* ═══ CLAUDE API — PSM-X5 ═══ */
+const PSM_SYSTEM_HAZOP=`Tu es l'agent A3-PHA-Engine de PSM-X5 (AgenticX5). Expert process safety, tu conduis des HAZOP selon IEC 61882.
+Pour le procédé décrit, génère un tableau HAZOP structuré avec :
+- Paramètres process identifiés
+- Guide words appliqués (NO, MORE, LESS, REVERSE, AS WELL AS, OTHER THAN)
+- Déviations avec causes crédibles
+- Conséquences (worst case sans protections)
+- Protections recommandées (IPL avec PFD estimé)
+- RPL (H/M/L)
+Termine par une LOPA simplifiée pour le scénario le plus critique et le SIL recommandé.
+Format Markdown structuré. Langue: français.`;
+
+const PSM_SYSTEM_AUDIT=`Tu es l'agent A13-Audit de PSM-X5 (AgenticX5). Expert conformité OSHA PSM 29 CFR 1910.119.
+Pour l'installation décrite, génère un rapport d'audit couvrant les 14 éléments PSM :
+1. Score par élément (0-100%)
+2. Findings critiques identifiés
+3. Recommandations P1 (urgentes), P2 (importantes), P3 (amélioration)
+4. Standards RAGAGEP applicables
+5. Score global de conformité
+Sois honnête et direct. Identifie les non-conformités potentielles clairement.
+Format Markdown structuré avec tableaux. Langue: français.`;
+
+const PSM_SYSTEM_RCA=`Tu es l'agent A11-RCA de PSM-X5 (AgenticX5). Expert investigation incidents process safety.
+Pour l'incident décrit, conduis une investigation structurée :
+1. Classification API 754 (Tier 1/2/3/4)
+2. 5-Why structuré (chaque "pourquoi" identifie une cause plus profonde)
+3. Barrières de prévention qui ont échoué (avec mode de défaillance)
+4. Barrières de mitigation qui ont fonctionné
+5. Bow-Tie verbal (menaces → barrières → événement → barrières → conséquences)
+6. Actions correctives SMART (Spécifique, Mesurable, Assignable, Réaliste, Temporel)
+7. Leçons apprises pour le programme PSM
+Format Markdown structuré. Langue: français.`;
+
+async function callClaudeAPI(systemPrompt,userMessage,targetEl,btnEl){
+  const btn=document.getElementById(btnEl);
+  const target=document.getElementById(targetEl);
+  btn.disabled=true;btn.textContent='⏳ Analyse en cours...';
+  target.innerHTML='<div class="ai-loading"><div class="spin"></div><div style="margin-top:8px;color:var(--t2);font-size:.82rem">Agent IA en cours d\'analyse...</div></div>';
+  try{
+    const response=await fetch("https://api.anthropic.com/v1/messages",{
+      method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:2000,
+        messages:[{role:"user",content:userMessage}],
+        system:systemPrompt
+      })
+    });
+    const data=await response.json();
+    const text=data.content?.map(c=>c.text||'').join('')||'Erreur: pas de réponse';
+    target.innerHTML=formatAIResponse(text);
+  }catch(err){
+    target.innerHTML='<div style="color:var(--rose);padding:1rem">❌ Erreur API: '+err.message+'<br><span style="font-size:.78rem;color:var(--t3)">Vérifiez que le Content-Security-Policy autorise api.anthropic.com</span></div>';
+  }
+  btn.disabled=false;btn.textContent=btn.dataset.label||'Générer';
+}
+
+function formatAIResponse(md){
+  return md
+    .replace(/### (.*)/g,'<h4 style="color:var(--d1);margin-top:14px">$1</h4>')
+    .replace(/## (.*)/g,'<h4 style="color:var(--accent);margin-top:16px;font-size:1rem">$1</h4>')
+    .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g,'<em style="color:var(--t2)">$1</em>')
+    .replace(/`(.*?)`/g,'<code style="background:rgba(233,69,96,0.12);padding:1px 6px;border-radius:4px;font-family:var(--mono);font-size:.82rem;color:var(--accent)">$1</code>')
+    .replace(/\n\n/g,'</p><p style="margin:8px 0">')
+    .replace(/\n- /g,'<br>• ')
+    .replace(/\n\d+\. /g,function(m){return '<br>'+m.trim()+' ';})
+    .replace(/\|(.+)\|/g,function(m){
+      const cells=m.split('|').filter(c=>c.trim());
+      return '<div style="display:flex;gap:4px;padding:2px 0;font-size:.8rem">'+cells.map(c=>'<span style="flex:1;padding:2px 6px;background:rgba(255,255,255,0.03);border-radius:4px">'+c.trim()+'</span>').join('')+'</div>';
+    });
+}
+
+function generateAIHazop(){
+  const input=document.getElementById('hazopInput').value.trim();
+  if(!input){document.getElementById('hazopAiResult').innerHTML='<div style="color:var(--amber)">⚠️ Décrivez un procédé ou équipement pour générer l\'analyse HAZOP.</div>';return;}
+  const btn=document.getElementById('hazopAiBtn');btn.dataset.label='🔬 Générer HAZOP IA';
+  callClaudeAPI(PSM_SYSTEM_HAZOP,input,'hazopAiResult','hazopAiBtn');
+}
+
+function generateAIAudit(){
+  const input=document.getElementById('auditInput').value.trim();
+  if(!input){document.getElementById('auditAiResult').innerHTML='<div style="color:var(--amber)">⚠️ Décrivez votre installation pour générer le rapport d\'audit.</div>';return;}
+  const btn=document.getElementById('auditAiBtn');btn.dataset.label='📋 Générer Audit IA';
+  callClaudeAPI(PSM_SYSTEM_AUDIT,input,'auditAiResult','auditAiBtn');
+}
+
+function generateAIRCA(){
+  const input=document.getElementById('rcaInput').value.trim();
+  if(!input){document.getElementById('rcaAiResult').innerHTML='<div style="color:var(--amber)">⚠️ Décrivez un incident ou near-miss pour lancer l\'investigation.</div>';return;}
+  const btn=document.getElementById('rcaAiBtn');btn.dataset.label='🔍 Investiguer IA';
+  callClaudeAPI(PSM_SYSTEM_RCA,input,'rcaAiResult','rcaAiBtn');
+}
+
+/* ═══ INIT ═══ */
+renderHub();
+</script>
+</body>
+</html>
