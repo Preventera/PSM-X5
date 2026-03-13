@@ -852,116 +852,464 @@ function renderAgents(){
   document.getElementById('ecoLinks').innerHTML=eco;
 }
 
-/* ═══ PSM-X5 v2.0 — SKILLS KNOWLEDGE BASE (condensed for API injection) ═══ */
+/* ═══ PSM-X5 v2.0 — SKILLS KNOWLEDGE BASE (merged from psm-skills-condensed.js) ═══ */
+const SKILL_HAZOP_LOPA=`HAZOP/LOPA CONDENSED REFERENCE
 
-const SKILL_HAZOP_LOPA=`RÉFÉRENCE HAZOP/LOPA:
-Guide Words IEC 61882: NO/NOT (négation totale), MORE (augmentation quantitative), LESS (diminution), AS WELL AS (addition qualitative), PART OF (substitution partielle), REVERSE (opposé logique), OTHER THAN (substitution complète), EARLY/LATE (temps), BEFORE/AFTER (séquence).
-Paramètres procédé: Flow, Pressure, Temperature, Level, Composition, pH, Viscosity, Phase, Speed, Voltage, Reaction.
+## Guide Words IEC 61882
+NO/NOT (négation), MORE (augmentation), LESS (diminution), AS WELL AS (ajout), PART OF (perte), REVERSE (opposé), OTHER THAN (substitution), EARLY/LATE (timing), BEFORE/AFTER (séquence)
 
-LOPA — Formule: Fscénario = FI × (1/IPL₁) × (1/IPL₂) × ... 
-Si Fscénario > Ftolerable → protection insuffisante → SIS requis.
-Fréquence tolérable typique: fatalité individuelle ≤1E-5/an, fatalité multiple ≤1E-6/an.
+## LOPA Formula
+TMEF = Σ [ IEFᵢ × Π PFDᵢⱼ × Π CMₖ ]
+- TMEF: Total Mitigated Event Frequency
+- IEF: Initiating Event Frequency (événement déclencheur)
+- PFD: Probability of Failure on Demand (chaque IPL)
+- CM: Conditional Modifiers (occupation, ignition, etc.)
 
-IPL (Independent Protection Layers) — PFD typiques CCPS:
-BPCS: 1E-1 | Alarme+opérateur (10min): 1E-1 | SIS SIL1: 1E-1 à 1E-2 | SIS SIL2: 1E-2 à 1E-3 | SIS SIL3: 1E-3 à 1E-4 | Relief valve: 1E-2 | Digue rétention: 1E-2 | Rupture disc: 1E-2 | Check valve: 1E-1 | Deluge system: 1E-2.
-Critères IPL: indépendance, spécificité, auditabilité, fiabilité quantifiée.
+## IPL Criteria (CCPS)
+1. Spécificité: capable prévenir scénario spécifique
+2. Indépendance: non affectée par autres IPL ou événement initiateur
+3. Fiabilité: PFD quantifiable
+4. Auditabilité: conçue pour validation/test
 
-Bow-Tie: Menaces (gauche) → Barrières prévention → Événement redouté (centre) → Barrières mitigation → Conséquences (droite). Chaque barrière = IPL avec PFD assigné.
+## PFD Typiques IPL
+- Design process: 10⁻²
+- BPCS control: 10⁻¹
+- Alarme + opérateur: 10⁻¹
+- SIF SIL 1: 10⁻¹ à 10⁻²
+- SIF SIL 2: 10⁻² à 10⁻³
+- SIF SIL 3: 10⁻³ à 10⁻⁴
+- PSV/Rupture disk: 10⁻²
+- Dike/Deluge: 10⁻²
 
-SIL cibles: SIL1 (PFDavg 1E-1 à 1E-2), SIL2 (1E-2 à 1E-3), SIL3 (1E-3 à 1E-4), SIL4 (1E-4 à 1E-5).
-RPL (Risk Priority Level): H=action immédiate, M=plan 30j, L=amélioration continue.`;
+## IEF Typiques (par an)
+- Vanne/pompe défaillance: 10⁻¹
+- Erreur humaine: 10⁻¹ à 10⁻²
+- Perte utilités: 10⁻¹
+- Corrosion LOPC: 10⁻²
+- Rupture tuyauterie: 10⁻³ à 10⁻⁴
 
-const SKILL_SIS_SIL=`RÉFÉRENCE SIS/SIF/SIL (IEC 61511 / ISA-84):
-Lifecycle SIS: Concept → Allocation SIL → Design → Implém. → Validation → Opération → Modification → Décommissionnement.
-3 méthodes vérification SIL: Risk Graph (qualitative), Risk Matrix (semi-quant.), LOPA (quantitative).
+## SIL Determination
+SIL 1: [10⁻¹, 10⁻²), RRF 10-100
+SIL 2: [10⁻², 10⁻³), RRF 100-1000
+SIL 3: [10⁻³, 10⁻⁴), RRF 1000-10000
+Target risk: 10⁻⁴ à 10⁻⁵/an pour fatalités
 
-PFDavg calcul simplifié (architecture 1oo1): PFDavg ≈ λDU × TI/2
-λDU = taux défaillance dangereuse non détectée, TI = intervalle de test (proof test).
-Architecture 1oo2: PFDavg ≈ (λDU × TI)²/3 + λDU_CCF × TI/2.
-β facteur (cause commune): typique 2-10%.
+## Format Output HAZOP
+Noeud | Paramètre | Guide Word | Déviation | Causes | Conséquences | Protections | RPL (H/M/L) | Recommandations
 
-Proof Testing: Full stroke test vs partial stroke. Intervalle typique: SIL1=annuel, SIL2=semestriel, SIL3=trimestriel.
-Diagnostic coverage: faible <60%, moyenne 60-90%, haute >90%.
-FSA (Functional Safety Assessment): 5 stages — concept, design, installation, pre-commissioning, opération.
-Modes de défaillance: safe (fail-safe), dangerous detected (DD), dangerous undetected (DU).`;
+## Bow-Tie Structure
+MENACES → [Barrières Prévention] → ÉVÉNEMENT TOP → [Barrières Mitigation] → CONSÉQUENCES
+Chaque barrière = IPL avec PFD assigné
 
-const SKILL_MOC_PSSR=`RÉFÉRENCE MOC/PSSR:
-MOC Workflow 8 étapes: 1-Soumission changement → 2-Classification (temporaire/permanent, replacement-in-kind exclu) → 3-Évaluation impact (technique, sécurité, santé, environnement, procédures) → 4-PHA/HAZOP impact → 5-Approbations multi-niveaux → 6-Implémentation avec supervision → 7-PSSR avant redémarrage → 8-Close-out et mise à jour PSI.
+Standards: IEC 61882, CCPS LOPA, IEC 61511, OSHA 1910.119(e)`;
 
-Causes d'échec MOC documentées: changement non déclaré (workaround), remplacement "identique" qui ne l'est pas, MOC temporaire devenu permanent, cascade PSI non mise à jour, formation personnel omise, PHA non révisée.
+const SKILL_SIS_SIL=`SIS/SIF/SIL CONDENSED REFERENCE
 
-Replacement-in-Kind: exempté de MOC SEULEMENT si identique en design, matériaux, spécifications. Tout doute → MOC complet.
+## Définitions
+- SIS: Safety Instrumented System (capteurs + logique + éléments finaux)
+- SIF: Safety Instrumented Function (fonction sécurité spécifique)
+- SIL: Safety Integrity Level (1-4, 4 = plus haute intégrité)
 
-PSSR Checklist: construction conforme plans, procédures mises à jour, formation complétée, PHA recommandations adressées, MOC fermé, équipements safety testés, alarmes vérifiées, EPI disponibles, permis travaux fermés, communication opérations.`;
+## Standards
+IEC 61511/ISA-84 (process industries), IEC 61508 (parent générique)
+OSHA reconnaît IEC 61511 comme RAGAGEP
 
-const SKILL_MECH_INTEGRITY=`RÉFÉRENCE INTÉGRITÉ MÉCANIQUE / RAGAGEP:
-Standards inspection:
-API 510: Pressure vessels — inspection interne+externe, calcul taux corrosion, remaining life.
-API 570: Piping — CML (Condition Monitoring Locations), calcul épaisseur minimale.
-API 653: Aboveground storage tanks — inspection fond, coquille, toit.
-API 520/521: Relief systems — sizing, installation, inspection.
-API 579-1/ASME FFS-1: Fitness-for-Service — évaluation composants dégradés.
+## Safety Lifecycle 3 Phases
+1. Analyse: H&RA → allocation SIS → SIL determination → SRS
+2. Réalisation: conception → vérification SIL → commissioning
+3. Opération: proof testing, maintenance, monitoring PFD, MOC strict
 
-RBI (Risk-Based Inspection) API 580/581: POF (probability of failure) × COF (consequence of failure) = risk ranking. Inspecter en priorité les équipements à haut risque.
+## SIL Tables (Low Demand Mode)
+SIL 1: PFDavg [10⁻¹, 10⁻²), RRF 10-100, Avail 90-99%
+SIL 2: PFDavg [10⁻², 10⁻³), RRF 100-1000, Avail 99-99.9%
+SIL 3: PFDavg [10⁻³, 10⁻⁴), RRF 1000-10000, Avail 99.9-99.99%
+SIL 4: PFDavg [10⁻⁴, 10⁻⁵), RRF 10000-100000, Avail 99.99-99.999%
 
-RAGAGEP: Recognized And Generally Accepted Good Engineering Practices — obligation OSHA d'appliquer les codes/standards reconnus (API, ASME, NFPA, etc.). Non-conformité RAGAGEP = citation OSHA.
+## PFDavg Calculation (1oo1)
+PFDavg ≈ λDU × TI / 2
+λDU: taux défaillance dangereuse non détectée
+TI: proof test interval
+Architectures votées (1oo2, 2oo3): formules combinatoires + β-factor
 
-ASME BPVC: Pressure vessel design/fabrication. ASME B31.3: Process piping design/materials.
-Catégories équipements PSM: vessels, piping, relief devices, emergency shutdown, controls, pompes/compresseurs, agitateurs.`;
+## 3 Critères SIL (TOUS requis)
+1. PFDavg dans plage SIL cible
+2. Architectural constraints (HFT redondance minimale)
+3. Systematic capability ≥ SIL cible
 
-const SKILL_RCA=`RÉFÉRENCE INVESTIGATION INCIDENTS / RCA:
-API 754 — Process Safety Indicators:
-Tier 1: LOPC (Loss of Primary Containment) majeur — conséquences (fatalité, blessure grave, évacuation, dommage >$100K, feu/explosion >25K).
-Tier 2: LOPC mineur — relâchement au-dessus seuils sans conséquences majeures.
-Tier 3: Near-miss — défaillance barrière, demande sur SIS, activation relief device.
-Tier 4: Leading indicators — discipline opérationnelle, training completion, MOC on-time, inspection compliance.
+## Proof Testing
+- Critique pour maintenir SIL
+- Couvre boucle COMPLÈTE (capteur → logique → final)
+- Augmenter TI → augmente PFDavg → peut dégrader SIL
+- Coverage < 100% → partial stroke testing
 
-5-Why structuré: Chaque "pourquoi" → cause plus profonde. S'arrêter quand la cause racine est un facteur organisationnel/systémique modifiable. Éviter: blâmer individus, causes trop vagues, sauter des niveaux.
+## FSA (Functional Safety Assessment) — 5 Stages
+1. Après H&RA + SRS
+2. Après conception SIS
+3. Après commissioning (AVANT danger présent)
+4. Après expérience opération
+5. Après toute modification
 
-Modèle Swiss Cheese (Reason): Les accidents résultent de l'alignement de trous dans multiples barrières défensives. Types de défaillances: active (erreur opérateur) vs latente (décision managériale, design).
+KPIs: PFDavg vs target, % proof tests à temps, demands réelles, spurious trips`;
 
-Tripod Beta: 3 niveaux — événement → causes immédiates (actes/conditions) → causes sous-jacentes (facteurs organisationnels) → causes racines (décisions management).
+const SKILL_MOC_PSSR=`MOC & PSSR CONDENSED REFERENCE
 
-Actions correctives SMART: Spécifique (quoi), Mesurable (indicateur), Assignable (responsable nommé), Réaliste (faisable), Temporel (échéance). Vérification efficacité obligatoire.`;
+## OSHA PSM 1910.119(l) & (i)
+MOC requis sauf replacement-in-kind (RIK)
+PSSR requis pour nouvel/modifié équipement
 
-const SKILL_EMERGENCY=`RÉFÉRENCE PLANIFICATION URGENCE:
-EAP (Emergency Action Plan): procédures évacuation, système alerte, comptage personnel, contacts urgence, formation annuelle.
-3 niveaux réponse: Niveau 1 (local, équipe opérations), Niveau 2 (site, brigade urgence interne), Niveau 3 (externe, pompiers/HAZMAT/autorités).
-Scénarios HHC: relâchement toxique (dispersion nuage), BLEVE, VCE (Vapor Cloud Explosion), pool fire, jet fire.
-Modélisation dispersion: ALOHA (gratuit EPA), PHAST (DNV), zones impact (ERPG-1/2/3, AEGL, IDLH).
-HAZWOPER 29 CFR 1910.120: formation répondants urgence matières dangereuses.
-Drills: exercice table-top (annuel minimum), exercice terrain (recommandé), after-action review obligatoire.`;
+## MOC 8 Étapes
+1. Initiation: classification, screening RIK, catégorie risque
+2. Scope: frontières, impacts upstream/downstream, lock scope
+3. Évaluation impact: équipe multidisciplinaire (ops, engineering, HSE, maintenance)
+4. Analyse risque: matrice/What-If (faible), HAZOP delta (élevé)
+5. Approbation: routage multi-niveaux basé sur risque
+6. Documentation: PSI, P&ID, SOPs, PHA AVANT changement
+7. Formation: TOUS affectés formés AVANT startup
+8. PSSR + Clôture: vérification complète, Go/No-Go
 
-const SKILL_PSI=`RÉFÉRENCE PROCESS SAFETY INFORMATION:
-3 catégories PSI OSHA: 
-1-Chimie: MSDS/SDS, réactivité, incompatibilités, stabilité thermique, produits décomposition, limites exposition (TLV-TWA, PEL, IDLH).
-2-Technologie: P&ID, diagrammes flux, inventaires chimiques, limites opératoires safe (T, P, flow, level), conséquences déviations, bilan matière/énergie.
-3-Équipement: matériaux construction, codes design (ASME, API), relief systems design basis, systèmes électriques (classification zones), systèmes ventilation.
-PSI doit être: exacte, à jour, accessible, compréhensible. Toute modification → MOC → mise à jour PSI en cascade.`;
+## PSSR Checklist Dynamique
+- Construction conforme specs ✓
+- Procédures révisées ✓
+- PHA complétée, recommandations résolues ✓
+- PSI mise à jour (P&ID, limites) ✓
+- Formation opérateurs complétée ✓
+- Équipements critiques inspectés ✓
+- Systèmes sécurité testés (SIF, PSV) ✓
+- Plan urgence mis à jour ✓
+- MOC documenté et approuvé ✓
+- Autorisation startup signée ✓
 
-const SKILL_OSHA=`RÉFÉRENCE OSHA PSM 29 CFR 1910.119:
-14 éléments: (1)Employee Participation, (2)PSI, (3)PHA, (4)Operating Procedures, (5)Training, (6)Contractors, (7)PSSR, (8)Mechanical Integrity, (9)Hot Work, (10)MOC, (11)Incident Investigation, (12)Emergency Planning, (13)Compliance Audits, (14)Trade Secrets.
-Applicabilité: 137 HHC listées Appendix A + liquides/gaz inflammables ≥10,000 lbs (excl. retail, huile/gaz upstream).
-Pénalités 2025: serious $16,131/violation, willful/repeat $161,323/violation, failure-to-abate $16,131/jour.
-PSM-NEP (National Emphasis Program): inspections ciblées industries chimiques/pétrochimiques. Top citations: MI, PHA, Operating Procedures, MOC, PSI.
-Audit triennal: obligation 14 éléments, findings documentés, actions correctives trackées, rétention 2 cycles.
-PHA revalidation: chaque 5 ans maximum.`;
+## MOC Temporaire vs Permanent
+- Temporaire: date expiration obligatoire, workflow reversion
+- Permanent: mise à jour permanente documentation
+- MOC temporaire expiré non clôturé = non-conformité critique
 
-const SKILL_EPA_SEVESO=`RÉFÉRENCE EPA RMP / SEVESO III / COMAH:
-EPA RMP (40 CFR Part 68): complémentaire OSHA PSM, focus relâchements accidentels vers communauté. 3 programmes: P1 (no public receptors), P2 (simplifié), P3 (identique PSM + programme prévention).
-Worst-case scenario et alternative release analysis obligatoires.
-Seveso III (EU 2012/18/EU): upper/lower tier establishments, rapport sécurité, plans urgence internes/externes, inspection autorité compétente.
-COMAH UK: Control of Major Accident Hazards, similaire Seveso post-Brexit.
-Convergence: tous ces cadres exigent PHA, MOC, emergency planning, audit — PSM-X5 couvre multi-juridictionnel.`;
+## Replacement-in-Kind
+SEUL changement exempté MOC complet:
+- Composant identique (specs, matériaux, capacité)
+- Si TOUTE caractéristique diffère → MOC requis
 
-const SKILL_ATEX=`RÉFÉRENCE ATEX / ZONES DANGEREUSES:
-Classification zones IEC 60079-10: Zone 0 (continu/long), Zone 1 (probable opération normale), Zone 2 (anormal/court). Poussières: Zone 20/21/22.
-NEC (Amérique Nord): Class I (gaz), Class II (poussières), Division 1 (normal), Division 2 (anormal).
-Groupes gaz: IIA (propane), IIB (éthylène), IIC (hydrogène/acétylène).
-Classes température: T1(450°C) → T6(85°C).
-8 types protection Ex: Ex d (enveloppe antidéflagrante), Ex e (sécurité augmentée), Ex i (sécurité intrinsèque), Ex p (surpression), Ex m (encapsulage), Ex o (immersion huile), Ex q (remplissage poudre), Ex n (non-incendive).
-Hot work en zone classée: permis obligatoire, test atmosphère LEL <10%, surveillance continue, fire watch 30min après.`;
+## Causes Échec MOC
+- Changements cachés (setpoints, alarmes sans MOC)
+- Scope creep
+- PSSR superficielle (checkbox mentality)
+- Formation retardée post-startup
+- Changements organisationnels non couverts`;
 
+const SKILL_MECH_INTEGRITY=`MECHANICAL INTEGRITY & RAGAGEP CONDENSED
+
+## OSHA PSM 1910.119(j) — 6 Catégories
+1. Pressure vessels & storage tanks
+2. Piping systems (vannes, brides, joints)
+3. Relief and vent systems/devices
+4. Emergency shutdown systems
+5. Controls (monitoring, alarmes, interlocks)
+6. Pumps
+
+## RAGAGEP Standards Clés
+
+**Pressure Vessels**
+- ASME BPVC (conception)
+- API 510 (inspection: 10 ans ext, 5 ans int)
+- API 579-1/ASME FFS-1 (fitness-for-service)
+
+**Piping**
+- ASME B31.3 (design)
+- API 570 (inspection en service)
+
+**Storage Tanks**
+- API 650/620 (conception)
+- API 653 (inspection 5 ans ext)
+
+**Relief Devices**
+- API 520 I & II (sizing, installation)
+- API 521 (relieving systems)
+- API 576 (inspection)
+
+**Rotating Equipment**
+- API 610 (pompes), 617 (compresseurs), 612 (turbines)
+
+## Programme MI — 7 Éléments
+1. Inventaire équipement avec RAGAGEP applicable
+2. Procédures écrites par catégorie
+3. Formation personnel (maintenance + dangers process)
+4. Inspections/tests selon RAGAGEP + fabricant
+5. Documentation (date, inspecteur, résultats)
+6. Correction déficiences avant remise en service
+7. Assurance qualité équipements neufs
+
+## Risk-Based Inspection (RBI)
+API 580/581: ajuster fréquences basées sur:
+- Taux corrosion, mécanismes dégradation
+- Conditions opératoires (T, P, milieu)
+- Conséquence défaillance
+- Historique inspection
+
+## Relief Device Management
+Documentation PSV: ID, set pressure, date test, résultats (ouverture, reseat), Pass/Fail, action corrective`;
+
+const SKILL_OSHA=`OSHA PSM 29 CFR 1910.119 CONDENSED
+
+## Applicabilité
+- 137 HHC listés Appendix A au-dessus threshold
+- Liquides/gaz inflammables ≥ 10,000 lbs (4,535.9 kg)
+- Standard performance-based (objectifs, pas méthodes)
+- PSM-NEP: inspections ciblées OSHA
+
+## 14 Éléments
+1. Employee Participation (c): plan écrit, consultation PHA
+2. Process Safety Information (d): chimie, techno, équipement AVANT PHA
+3. Process Hazard Analysis (e): PHA chaque procédé, revalidation ≤5 ans
+4. Operating Procedures (f): écrites, accessibles, certifiées annuellement
+5. Training (g): initiale avant assignment, refresher ≥3 ans
+6. Contractors (h): info dangers, performance vérifiée
+7. Pre-Startup Safety Review (i): nouvel/modifié équipement
+8. Mechanical Integrity (j): 6 catégories, RAGAGEP, inspections
+9. Hot Work Permits (k): permis requis sur/près procédé
+10. Management of Change (l): sauf RIK, évaluation avant changement
+11. Incident Investigation (m): ≤48h initiation, 5 ans rétention
+12. Emergency Planning (n): EAP 1910.38, coordination locale
+13. Compliance Audits (o): ≥ tous 3 ans, 2 rapports conservés
+14. Trade Secrets (p): info nécessaire partagée malgré secrets
+
+## Pénalités 2025
+- Serious: $16,131/violation
+- Willful: $161,323/violation
+- Repeat: $161,323/violation
+- Failure to Abate: $16,131/jour
+
+## Citations Fréquentes
+MI, MOC, PHA, PSI, Operating Procedures
+
+## Compliance Audit Triennal (Element #13)
+- Évaluation ≥ tous 3 ans de TOUS les 14 éléments
+- Réponses documentées à chaque finding
+- 2 rapports les plus récents conservés
+
+## Replacement-in-Kind
+Seul changement exempté MOC:
+- Composant identique (specs, matériaux, capacité)
+- Documentation requise même pour RIK
+- Si TOUTE différence → MOC requis`;
+
+const SKILL_RCA=`INCIDENT INVESTIGATION & RCA CONDENSED
+
+## OSHA PSM 1910.119(m)
+- Enquête requise: incident résultant ou pouvant résulter en relâchement catastrophique HHC
+- Initiée ≤48 heures
+- Équipe multidisciplinaire: expert procédé + expert investigation
+- Rapport: date, description, facteurs causaux, recommandations
+- Actions correctives suivies
+- Rapports conservés 5 ans minimum
+
+## Méthodologie RCA
+
+**5-Why Structuré**
+Chaînes causales: causes immédiates (techniques) → sous-jacentes (humaines, procédurales) → racines (management, culture)
+
+**Arbre des Causes**
+Structure arborescente: conséquence → événements → causes → racines
+Chaque branche = chaîne causale indépendante
+
+**Bow-Tie Post-Incident**
+Identifier barrières ÉCHOUÉES (prévention + mitigation)
+Mode défaillance: absente, dégradée, contournée
+
+## API 754 Classification
+- Tier 1: LOPC conséquence majeure (injury DAFW+, fatalité, >$100K, feu/explosion)
+- Tier 2: LOPC conséquence moindre (recordable, >$2500)
+- Tier 3: challenge barrières (near-miss, demande SIS)
+- Tier 4: faiblesse composant (leading indicator)
+
+## Triangle Causes (CCPS)
+- Facteurs humains: ~42% (fatigue, erreur procédure, charge cognitive)
+- Facteurs organisationnels: ~35% (communication, leadership, maintenance différée)
+- Facteurs techniques: ~23% (défaillance équipement, corrosion, atmosphère)
+
+## Causes LOPC Fréquentes
+MOC inadéquat, intégrité mécanique déficiente, erreur opérateur, SIS/SIF défaillante, alarm flood, maintenance différée
+
+## Actions Correctives SMART
+- Spécifique: action précise
+- Mesurable: critère complétion
+- Assignable: responsable nommé
+- Réaliste: faisable
+- Temporelle: échéance définie
+
+## Hiérarchie Contrôles (Process Safety)
+1. Élimination danger (inherently safer)
+2. Substitution (matériau moins dangereux)
+3. Contrôle engineering (SIS, interlock, confinement)
+4. Contrôle administratif (procédure, formation)
+5. EPI (dernière ligne)`;
+
+const SKILL_ATEX=`ATEX & HAZARDOUS AREAS CONDENSED
+
+## Classification Zones IEC/ATEX (International)
+
+**Gaz/Vapeurs**
+- Zone 0: atmosphère explosive continue ou longues périodes (>1000h/an)
+- Zone 1: probable en opération normale (10-1000h/an)
+- Zone 2: improbable en normal, brève si survient (<10h/an)
+
+**Poussières**
+- Zone 20: nuage explosif continu (silos, collecteurs)
+- Zone 21: probable en normal (ensachage, filtres)
+- Zone 22: improbable en normal (emballage, entrepôts)
+
+## NEC Class/Division (USA)
+- Class I (gaz/vapeurs): Division 1 ≈ Zone 0+1, Division 2 ≈ Zone 2
+- Class II (poussières): Division 1 ≈ Zone 20+21, Division 2 ≈ Zone 22
+
+## Groupes Gaz
+IIA (Propane, méthane) = NEC Group D
+IIB (Éthylène, H₂S) = NEC Group C
+IIC (H₂, acétylène) = NEC Group B/A
+
+## Standards
+ATEX 2014/34/EU (équipements), IEC 60079 series, NEC Art 500-506
+
+## Protection Types Equipment
+Ex d (antidéflagrant): Zone 1,2
+Ex e (sécurité augmentée): Zone 1,2
+Ex i (sécurité intrinsèque): ia=Zone 0, ib=Zone 1, ic=Zone 2
+Ex p (surpression): Zone 1,2
+Ex m (encapsulage): Zone 1,2
+Ex nA (non-sparking): Zone 2 seulement
+Ex t (dust-tight): Zone 21,22
+
+## Hot Work Zones Classées
+1. Zone dégazée et testée (<10% LEL)
+2. Monitoring continu O₂ et LEL pendant travaux
+3. Équipements conformes (mise à terre, extincteur)
+4. Fire watch pendant + 30-60 min après
+5. Autorisation spécifique responsable zone`;
+
+const SKILL_EMERGENCY=`EMERGENCY RESPONSE PLANNING CONDENSED
+
+## OSHA PSM 1910.119(n) + 1910.38
+EAP requis pour site entier
+Coordination avec autorités locales
+Si HAZWOPER 1910.120 applicable → exigences additionnelles
+
+## Éléments EAP Essentiels
+1. Procédures évacuation + routes urgence
+2. Procédures opérateurs shutdown critique
+3. Comptage personnel post-évacuation
+4. Sauvetage + premiers soins
+5. Système alerte (sirènes, PA, radio)
+6. Contacts urgence (interne + externe)
+7. Coordination services urgence externes
+
+## Scénarios Relâchement HHC
+Pour chaque HHC documenter:
+- Propriétés dangereuses (toxicité, inflammabilité, réactivité)
+- Scénarios crédibles (worst-case + alternative)
+- Zones impact modélisées (toxic endpoint, LEL, radiation thermique)
+- Actions réponse spécifiques
+
+## Modélisation Dispersion
+Outils: ALOHA (EPA/NOAA), PHAST (DNV), CANARY (Quest)
+Paramètres: débit relâchement, météo, topographie, durée
+
+## Niveaux Réponse
+Niveau 1 - Alerte: mineur, confiné zone → réponse locale
+Niveau 2 - Urgence site: significatif, multi-zones → évacuation partielle, ERT, autorités notifiées
+Niveau 3 - Urgence majeure: catastrophique, impact off-site → évacuation complète, PMU, coordination municipale
+
+## Exercices
+- Tabletop: simulation théorique décideurs (trimestriel)
+- Drill fonctionnel: test composant spécifique (alarmes, ERT)
+- Exercice pleine échelle: simulation réaliste tous acteurs (annuel minimum)
+Documentation + lessons learned + actions correctives`;
+
+const SKILL_PSI=`PROCESS SAFETY INFORMATION CONDENSED
+
+## OSHA PSM 1910.119(d)
+PSI compilée AVANT PHA
+
+## 3 Catégories PSI
+
+**1. Information HHC**
+- Toxicité, limites exposition
+- Données physiques/chimiques (flash point, LEL/UEL, pression vapeur)
+- Réactivité, stabilité thermique
+- Effets corrosifs
+- Risques mélange autres produits
+
+**2. Technologie Procédé**
+- Diagrammes flux (Block Flow, PFD)
+- Chimie procédé (réactions, stœchiométrie)
+- Inventaire maximum HHC
+- Limites opératoires sûres (T, P, débit, niveau, composition)
+- Conséquences déviations au-delà limites
+
+**3. Équipements**
+- Matériaux construction
+- P&ID (Piping and Instrumentation Diagrams)
+- Classification électrique (NEC/ATEX)
+- Design codes et standards (RAGAGEP)
+- Systèmes relief (design basis, sizing)
+- Ventilation
+- Bilan sécurité (si existant avant PSM)
+
+## Mise à Jour Cascade via MOC
+Chaque MOC déclenche vérification/mise à jour:
+1. P&ID affectés → marqués révision
+2. Limites opératoires → vérifiées nouvelles conditions
+3. MSDS/SDS → vérifiées si nouveau produit
+4. Specs équipement → mises à jour si modification
+5. PHA/HAZOP → delta analysis si changement significatif
+
+## Version Control
+- Documents PSI versionnés avec historique complet
+- Lien bidirectionnel MOC ↔ document PSI
+- Traçabilité PROV-O modifications
+
+## Accessibilité
+OSHA exige PSI accessible à TOUS employés + sous-traitants impliqués procédé
+Pas de restriction trade secrets pour info nécessaire sécurité`;
+
+const SKILL_EPA_SEVESO=`EPA RMP / SEVESO / COMAH CONDENSED
+
+## EPA RMP 40 CFR Part 68 (USA)
+
+**Relation OSHA PSM**
+- Règle parallèle EPA (pas OSHA)
+- Focus: protection communauté + environnement
+- 77 substances toxiques + 63 inflammables/explosifs
+- Seuils DIFFÉRENTS d'OSHA PSM
+- Beaucoup installations couvertes BOTH PSM + RMP
+
+**Éléments RMP**
+- Worst-case release analysis + scenarios alternatifs
+- 5-year accident history
+- Prevention program (3 levels basés risque)
+- Emergency response coordonné avec community
+- RMP Plan soumis EPA tous 5 ans
+
+**Mise à jour 2024**
+RAGAGEP renforcé PHA, safer technology alternatives, third-party audits, root cause analysis
+
+## Seveso III (EU 2012/18/EU)
+
+**2 Niveaux**
+Lower-tier: notification, MAPP (politique prévention), SMS
+Upper-tier: Safety Report, plans urgence internes ET externes, info publique, inspections régulières, land-use planning, domino effects
+
+## COMAH (UK post-Brexit)
+Structure similaire Seveso III (lower/upper tier)
+Enforced HSE + Environment Agency
+
+## Autres Juridictions
+- Arabie Saoudite (SAIS): harmonisé IECEx
+- Canada (Québec): Loi SST + SIMDUT (WHMIS), CNESST
+- France: ICPE + INERIS, autorisation préfectorale
+- Australie: Major Hazard Facilities
+- Inde: Factories Act + MSIHC post-Bhopal
+
+## Mapping Multi-Juridictionnel
+PSM-X5 Standards-Gouvernance: 40+ normes unifiées Knowledge Graph`;
 
 /* ═══ ENHANCED SYSTEM PROMPTS v2.0 — Skills-enriched ═══ */
 
